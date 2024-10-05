@@ -1,13 +1,14 @@
-import { useState } from 'react'
-
+import { useSelector } from "react-redux";
+import { rootState } from "./data/redux/reducers";
+import { ControllerRoutes } from "./routes/ControllerRoutes";
+import "./index.css";
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    <p>teste</p>
+      
+      <ControllerRoutes />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
