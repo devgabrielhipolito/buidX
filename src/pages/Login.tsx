@@ -3,18 +3,14 @@ import ComponentLogin from "../components/Login/ComponentLogin";
 
 const Login = () => {
   return (
-    <section className="">
-      <section className="sm:mx-auto  sm:w-full sm:max-w-sm">
-        <img
-          alt="Your Company"
-          src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-          className="mx-auto h-10 w-auto"
-        />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign in to your account
-        </h2>
-      </section>
-      <ComponentLogin />
+    <section className="  h-screen flex flex-col justify-center items-center">
+      <div>
+        <h1 className="text-4xl mb-2">BuildX</h1>
+        <p className="mb-5 w-72">
+          Entre na sua conta para gerencia suas produções de veículos
+        </p>
+        <ComponentLogin />
+      </div>
     </section>
   );
 };
