@@ -1,16 +1,46 @@
 import { memo } from "react";
 import ComponentLogin from "../components/Login/ComponentLogin";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  useForm,
+  UseFormRegister,
+} from "react-hook-form";
+import { authSchema, AuthSchema } from "../schemas/auth";
 
 const Login = () => {
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthSchema>({
+    resolver: yupResolver(authSchema),
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    console.log("Enviou");
+  });
+
   return (
-    <section className="  h-screen flex flex-col justify-center items-center">
-      <div>
+    <section className="h-screen flex flex-col justify-center  items-center">
+      <div className="w-[450px] max-sm:w-[90%]">
         <h1 className="text-4xl mb-2">BuildX</h1>
         <p className="mb-5 w-72">
           Entre na sua conta para gerencia suas produções de veículos
         </p>
-        <ComponentLogin />
       </div>
+      <ComponentLogin
+        error={errors}
+        control={control}
+        register={register}
+        onSubmit={onSubmit}
+      />
+      <a className="mt-5" href="">
+        Esqueceu a senha?
+      </a>
     </section>
   );
 };

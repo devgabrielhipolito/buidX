@@ -2,10 +2,17 @@
 export default {
   content: ["./src/**/*.{html,js,tsx,ts}"],
   theme: {
-    extend: {},
-    colors: {
-      dark: "#201F1F",
-      lightBlue: "rgb(221 221 221)",
+    fontFamily: {
+      sanfrancisco: ["san francisco", "sans-serif"],
+      "sanfrancisco-normal": ["san francisco normal", "sans-serif"],
+    },
+    extend: {
+      colors: {
+        black: "#201F1F",
+        "gray-black": "#3C3B3B",
+        white: "#fff",
+        error: "#FE3210",
+      },
     },
   },
 
