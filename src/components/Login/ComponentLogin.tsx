@@ -8,6 +8,7 @@ import {
 
 interface ComponentLoginProps {
   onSubmit: () => void;
+  isloading: boolean;
   control: Control<{
     email: string;
     password: string;
@@ -28,6 +29,7 @@ const ComponentLogin: React.FC<ComponentLoginProps> = ({
   onSubmit,
   control,
   error,
+  isloading,
 }) => {
   return (
     <form className="w-[450px] max-sm:w-[90%]" action="">
@@ -73,9 +75,10 @@ const ComponentLogin: React.FC<ComponentLoginProps> = ({
       </div>
       <button
         onClick={onSubmit}
+        disabled={isloading}
         className=" w-full  text-white bg-black hover:bg-gray-black mt-5 p-2 text-center  rounded-md   "
       >
-        Login
+        {(isloading && "carregando") || "Login"}
       </button>
     </form>
   );

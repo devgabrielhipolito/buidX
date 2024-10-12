@@ -8,10 +8,10 @@ export default {
     },
     extend: {
       colors: {
-        black: "#201F1F",
-        "gray-black": "#3C3B3B",
+        "gray-500": "#1F1F1F",
+        "gray-300": "#8B8B8B",
         white: "#fff",
-        error: "#FE3210",
+        black: "#161616",
       },
     },
   },

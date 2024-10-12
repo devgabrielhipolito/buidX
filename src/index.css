@@ -21,3 +21,7 @@ html {
   font-family: "san francisco normal";
   src: url(assets/fonts/SF-Compact-Rounded-Light.otf);
 }
+
+svg {
+  fill:#8B8B8B;
+}

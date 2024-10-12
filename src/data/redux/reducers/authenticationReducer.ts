@@ -1,22 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type userType = {
-  name: string;
-  email: string;
-};
-
-type AuthType = {
-  token: string | null;
-  isAuthenticated: boolean;
-  userPemission: string;
-  user: userType | null;
-};
+import { AuthType, ObjectUser } from "../../../types/authenticationTypes";
 
 const initialState: AuthType = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   token: null,
-  userPemission: "cargo",
+  userPermission: "employee_master",
   user: null,
+};
+
+type responseAuth = {
+  token: string;
+  email: string;
+  name: string;
+  permission: string;
 };
 
 const authenticationReducer = createSlice({
@@ -25,12 +21,22 @@ const authenticationReducer = createSlice({
   reducers: {
     AUTHENTICATION_REQUEST: (
       state: AuthType,
-      { payload: data }: PayloadAction<any>
+      {
+        payload: { token, email, name, permission },
+      }: PayloadAction<responseAuth>
     ) => ({
       ...state,
+      token: token,
+      user: { email, name },
+      userPermission: permission,
+    }),
+    AUTHENTICATION_SUCCESS: (state: AuthType) => ({
+      ...state,
+      isAuthenticated: true,
     }),
   },
 });
 
-export const { AUTHENTICATION_REQUEST } = authenticationReducer.actions;
+export const { AUTHENTICATION_REQUEST, AUTHENTICATION_SUCCESS } =
+  authenticationReducer.actions;
 export default authenticationReducer.reducer;

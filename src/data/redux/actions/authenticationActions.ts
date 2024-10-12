@@ -1,3 +1,4 @@
 export default {
   AUTHENTICATION_REQUEST: "authentication/AUTHENTICATION_REQUEST",
+  AUTHENTICATION_SUCCESS: "authentication/AUTHENTICATION_SUCCESS",
 } as const;

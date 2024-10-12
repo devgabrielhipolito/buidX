@@ -9,7 +9,12 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { authSchema, AuthSchema } from "../schemas/auth";
-
+import { useAuthenticationUserMutation } from "../data/redux/RtkQuery";
+import { useQueryApi } from "../data/hooks/useQueryApi";
+import { ActionsApi } from "../types/useQueryApiTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { rootState } from "../data/redux/reducers";
+import { authenticationSuccess } from "../data/redux/actions";
 const Login = () => {
   const {
     control,
@@ -19,9 +24,15 @@ const Login = () => {
   } = useForm<AuthSchema>({
     resolver: yupResolver(authSchema),
   });
-
+  const { dispatchAction, isLoading } = useQueryApi();
+  const dispatch = useDispatch();
+  const user = useSelector(
+    (state: rootState) => state.authentication.isAuthenticated
+  );
+  console.log(user);
   const onSubmit = handleSubmit((data) => {
-    console.log("Enviou");
+    console.log(data);
+    dispatchAction({ data, action: ActionsApi.authentication });
   });
 
   return (
@@ -37,6 +48,7 @@ const Login = () => {
         control={control}
         register={register}
         onSubmit={onSubmit}
+        isloading={isLoading}
       />
       <a className="mt-5" href="">
         Esqueceu a senha?

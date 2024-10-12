@@ -3,30 +3,39 @@ import { rootState } from "../data/redux/reducers";
 import { ReactElement, useCallback, useMemo } from "react";
 import { privateRoutes, publicRoutes } from "./routes";
 import { Route, Routes } from "react-router-dom";
+import verifyPermissions from "../utils/alerts/verifyPermissions";
+import Sidenav from "../components/Login/Sidenav";
 
 export const ControllerRoutes = () => {
   const isAuthenticated = useSelector(
     (state: rootState) => state.authentication.isAuthenticated
   );
-
+  const userPermission = useSelector(
+    (state: rootState) => state.authentication.userPermission
+  );
+  console.log(userPermission);
   const routes = useMemo(() => {
-    if (!isAuthenticated) return publicRoutes;
+    if (!isAuthenticated) {
+      return publicRoutes;
+    }
 
     return privateRoutes;
   }, [isAuthenticated]);
 
   const getRoutes = useCallback(() => {
-    return routes.map(({ key, path, element }) => {
-      const mappedRoutes: ReactElement[] = [];
-
-      mappedRoutes.push(<Route key={key} path={path} element={element} />);
-
-      return mappedRoutes.flat() as ReactElement[];
+    const mappedRoutes: ReactElement[] = [];
+    routes.map(({ key, path, element, permission }) => {
+      if (verifyPermissions(permission, userPermission)) {
+        mappedRoutes.push(<Route key={key} path={path} element={element} />);
+      }
     });
+
+    return mappedRoutes.flat() as ReactElement[];
   }, [isAuthenticated]);
 
   return (
-    <section>
+    <section className="bg-slate-400 grid grid-cols-5 h-screen">
+      <Sidenav routes={routes} userPermission={userPermission} />
       <Routes>{getRoutes()}</Routes>
     </section>
   );

@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
-import { userPermission } from "../../utils/permission";
+import { PermissionsRequired } from "../../types/permissions";
 
 export type TypeRoutes = {
   icon?: ReactElement;
   element: ReactElement;
   key: string;
   path: string;
-  permission: userPermission[];
+  permission: PermissionsRequired[];
 };
