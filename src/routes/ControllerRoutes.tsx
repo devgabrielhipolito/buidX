@@ -4,7 +4,7 @@ import { ReactElement, useCallback, useMemo } from "react";
 import { privateRoutes, publicRoutes } from "./routes";
 import { Route, Routes } from "react-router-dom";
 import verifyPermissions from "../utils/alerts/verifyPermissions";
-import Sidenav from "../components/Login/Sidenav";
+import Sidenav from "../components/Sidenav/Sidenav";
 
 export const ControllerRoutes = () => {
   const isAuthenticated = useSelector(
@@ -34,7 +34,7 @@ export const ControllerRoutes = () => {
   }, [isAuthenticated]);
 
   return (
-    <section className="bg-slate-400 grid grid-cols-5 h-screen">
+    <section className="bg-black grid grid-cols-5 h-screen">
       <Sidenav routes={routes} userPermission={userPermission} />
       <Routes>{getRoutes()}</Routes>
     </section>
