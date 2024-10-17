@@ -1,8 +1,9 @@
 import AdminIcon from "../assets/imgs/LinksIcons/AdminIcon";
 import DashboardIcon from "../assets/imgs/LinksIcons/DashboardIcon";
 import DevelpomentIcon from "../assets/imgs/LinksIcons/DevelpomentIcon";
-import TeamManagerIcon from "../assets/imgs/LinksIcons/teamManagerIcon";
+import TeamManagerIcon from "../assets/imgs/LinksIcons/TeamManagerIcon";
 import ComponentsDepoyments from "../components/depoyments/ComponentsDepoyments";
+import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import { PermissionsRequired } from "../types/permissions";
 import { TypeRoutes } from "./types";
@@ -24,7 +25,7 @@ export const publicRoutes: TypeRoutes[] = [
 
 export const privateRoutes: TypeRoutes[] = [
   {
-    element: <p>overview</p>,
+    element: <Dashboard />,
     key: "Dashboard",
     icon: <DashboardIcon />,
     path: "/",

@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body,
-html {
+body {
   height: 100%;
   background-color: #ededed;
 }
@@ -23,5 +22,5 @@ html {
 }
 
 svg {
-  fill:#8B8B8B;
+  fill: #8b8b8b;
 }
