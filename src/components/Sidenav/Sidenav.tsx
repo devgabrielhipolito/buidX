@@ -19,7 +19,7 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission }) => {
           <li>
             <Link
               onClick={() => setIsMobile(false)}
-              className=" flex gap-x-2 text-sm bg-gray-500 p-3 text-gray-300 rounded-md"
+              className=" flex gap-x-2 text-sm bg-gray-500 p-3 items-center text-gray-300 rounded-md"
               to={path}
             >
               {icon}

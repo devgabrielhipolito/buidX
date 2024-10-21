@@ -5,8 +5,6 @@ import { privateRoutes, publicRoutes } from "./routes";
 import { Route, Routes } from "react-router-dom";
 import verifyPermissions from "../utils/alerts/verifyPermissions";
 import Sidenav from "../components/Sidenav/Sidenav";
-import currentDate from "../utils/currentDate";
-import Calender from "../pages/Calender";
 
 export const ControllerRoutes = () => {
   const isAuthenticated = useSelector(
@@ -37,16 +35,14 @@ export const ControllerRoutes = () => {
   return (
     <section
       className={` w-full  relative ${
-        isAuthenticated ? " flex h-full" : ""
+        isAuthenticated ? " flex h-full bg-black" : ""
       }`}
     >
-      {/* {isAuthenticated && (
+      {isAuthenticated && (
         <Sidenav routes={routes} userPermission={userPermission} />
-      )} */}
+      )}
       <section className=" w-full h-screen max-w[90%] ml-[20%] p-7 ">
-        {/* <Routes>{getRoutes()}</Routes> */}
-
-        <Calender />
+        <Routes>{getRoutes()}</Routes>
       </section>
     </section>
   );
