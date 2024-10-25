@@ -2,17 +2,18 @@ import React from "react";
 import { months } from "../utils/calender/CalenderDays";
 import currentDate from "../utils/calender/currentDate";
 import { dados } from "../mocks/Dashboard/data";
-import Calender from "../components/Dashbaord/Calender";
+import Calender from "../components/Dashbaord/Calender/Calender";
+import Table from "../components/Dashbaord/Tables/Table";
 
 const Dashboard = () => {
   return (
-    <section className=" dashboard flex flex-col flex-1 gap-5 w-full ">
+    <section className=" dashboard flex flex-col  flex-1 gap-5 w-full ">
       <h1 className="text-3xl text-white">
         <span className="text-blue-600">Monitore</span> sua produtividade
       </h1>
 
-      <div className=" flex flex-wrap justify-around gap-4">
-        <div className=" grafico rounded-md flex flex-col  p-4 bg-gray-100 w-[550px] h-72">
+      <div className=" flex flex-wrap flex-grow justify-around gap-4">
+        <div className=" grafico flex-grow rounded-md flex flex-col  p-4 bg-gray-100 w-[550px] h-72">
           <h2 className="text-white text-lg w-full p-2">Grafico</h2>
           <p className="text-3xl text-white ">
             12.500<span className="text-sm text-stone-600">/Produzidos</span>
@@ -51,7 +52,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="rounded-md bg-gray-100 w-full h-64">Tabela</div>
+      <Table />
     </section>
   );
 };

@@ -1,10 +1,9 @@
-import { FC, ReactElement } from "react";
+import {  ReactElement } from "react";
 
 const date = new Date();
 const currentYear = date.getFullYear();
-const currentMonth = date.getMonth() ;
-const currentDay = date.getDate() ;
-console.log(date.getMonth())
+const currentMonth = date.getMonth();
+const currentDay = date.getDate();
 
 const daysInMonth = (): number => {
   return new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -28,8 +27,6 @@ const nextMonthDays = Array.from(
   (_, i) => i + 1
 );
 
-
-
 const dataarray = [
   ...prevMonthDays.map((day) => ({ day, type: "prevMonthDays" as const })),
   ...Array.from({ length: daysInMonth() }, (_, i) => ({
@@ -39,6 +36,10 @@ const dataarray = [
   ...nextMonthDays.map((day) => ({ day, type: "nextMonthDays" as const })),
 ];
 
+
+
+
+
 export const renderCalender = () => {
   const mappedDates = [] as ReactElement[];
 
@@ -46,9 +47,7 @@ export const renderCalender = () => {
     if (currentDay === day && currentMonth) {
       mappedDates.push(<p className="w-9 text-blue-600 ">{day}</p>);
     } else if (currentDay > day) {
-      mappedDates.push(
-        <p className="w-9  text-sm  text-gray">{day}</p>
-      );
+      mappedDates.push(<p className="w-9  text-sm  text-gray">{day}</p>);
     } else if (type === "nextMonthDays" || type === "prevMonthDays") {
       mappedDates.push(<p className="w-9  text-gray ">{day}</p>);
     } else if (type === "previous") {
@@ -58,5 +57,3 @@ export const renderCalender = () => {
 
   return mappedDates.flat();
 };
-
-

@@ -1,11 +1,21 @@
-import React from "react";
+import React, { FC } from "react";
 
-const CalenderHeader = () => {
+type TCalenderHeader = {
+  nextMonth: () => void;
+  previousMonth: () => void;
+  monthSelected: string;
+};
+
+const CalenderHeader: FC<TCalenderHeader> = ({
+  nextMonth,
+  previousMonth,
+  monthSelected,
+}) => {
   return (
     <header className="flex text-white justify-around  w-full">
-      <button> {"<"} </button>
-      <p>Outubro</p>
-      <button> {">"} </button>
+      <button onClick={previousMonth}> {"<"} </button>
+      <p>{monthSelected}</p>
+      <button onClick={nextMonth}> {">"} </button>
     </header>
   );
 };
