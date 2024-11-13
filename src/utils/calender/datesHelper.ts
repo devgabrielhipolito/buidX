@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 export const date = dayjs();
 export const today = date.date();
 export const currentmonths = date.month();
+console.log(currentmonths)
 export const getPreviousMonth = (date: dayjs.Dayjs) => {
   const previousMonth = date.subtract(1, "month");
   return previousMonth.daysInMonth();

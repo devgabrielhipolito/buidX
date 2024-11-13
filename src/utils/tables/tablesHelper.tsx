@@ -3,9 +3,8 @@ export const tables = [
   "Marca",
   "Modelo",
   "Equipe",
-  "Data de inicio",
-  "Data de entrega",
-  "Duração",
+  "prazo",
+  "criado",
   "Status",
   "Ação",
 ];

@@ -24,3 +24,12 @@ body {
 svg {
   fill: #8b8b8b;
 }
+
+input[type="checkbox"] {
+  border-radius: 100%;
+  background-color: #212221;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+}

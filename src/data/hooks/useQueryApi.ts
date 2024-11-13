@@ -1,20 +1,44 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { dispatchTypes, MappedFetchTypes } from "../../types/useQueryApiTypes";
 import { useDispatch } from "react-redux";
-import { useAuthenticationUserMutation } from "../redux/RtkQuery";
-import { authenticationRequest, authenticationSuccess } from "../redux/actions";
+import {
+  useAuthenticationUserMutation,
+  useProductionCreateMutation,
+  useProductionUpdateApiMutation,
+} from "../redux/RtkQuery";
+import {
+  authenticationRequest,
+  authenticationSuccess,
+  productionRequest,
+  productionSucess,
+  productionUpdate,
+} from "../redux/actions";
 
 export const useQueryApi = () => {
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
+
   const [authenticationUser, { isLoading: isAuthLoading }] =
     useAuthenticationUserMutation();
+  const [productionCreate, { isLoading: isCreatedProduction }] =
+    useProductionCreateMutation();
+  const [productionUpdateApi, { isLoading: isUpdateProduction }] =
+    useProductionUpdateApiMutation();
 
   const mappedFetch: MappedFetchTypes = {
     authentication: {
       api: authenticationUser,
       reducer: authenticationRequest,
       reducerSucess: authenticationSuccess,
+    },
+    createProduction: {
+      api: productionCreate,
+      reducer: productionRequest,
+      reducerSucess: productionSucess,
+    },
+    productionUpdate: {
+      api: productionUpdateApi,
+      reducer: productionUpdate,
     },
   };
 
@@ -28,14 +52,14 @@ export const useQueryApi = () => {
 
   const query = ({ action, data }: dispatchTypes) => {
     const api = mappedFetch[action].api(data);
+    console.log(data);
     api.then(({ data, error }) => {
       if (error) {
         return setMessage(error);
       }
-      console.log(data);
       setMessage(null);
+      console.log(data)
       dispatch(mappedFetch[action].reducer(data));
-
       if (mappedFetch[action].reducerSucess) {
         dispatch(mappedFetch[action].reducerSucess(true));
       }

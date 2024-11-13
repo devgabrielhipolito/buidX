@@ -4,6 +4,7 @@ import DevelpomentIcon from "../assets/imgs/LinksIcons/DevelpomentIcon";
 import TeamManagerIcon from "../assets/imgs/LinksIcons/TeamManagerIcon";
 import ComponentsDepoyments from "../components/depoyments/ComponentsDepoyments";
 import Dashboard from "../pages/Dashboard";
+import Desenvolvimento from "../pages/Desenvolvimento";
 import Login from "../pages/Login";
 import { PermissionsRequired } from "../types/permissions";
 import { TypeRoutes } from "./types";
@@ -36,7 +37,7 @@ export const privateRoutes: TypeRoutes[] = [
     ],
   },
   {
-    element: <p>Desenvolvimento</p>,
+    element: <Desenvolvimento />,
     key: "Desenvolvimento",
     icon: <DevelpomentIcon />,
     path: "/desenvolvimento",

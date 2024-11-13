@@ -1,7 +1,9 @@
+import { useState } from "react";
 import useControllerCalender from "../../../data/hooks/useControllerCalender";
 import CalenderHeader from "./CalenderHeader";
 import Dates from "./Dates";
 import Days from "./Days";
+import ModalDateSelected from "../../Modal/ModalDateSelected";
 
 const Calender = () => {
   const {
@@ -11,16 +13,32 @@ const Calender = () => {
     monthSelected,
     currentDate,
   } = useControllerCalender();
-  
+  const [modalisOpen, setModalIsOpen] = useState<{
+    date: {} | null;
+    modal: boolean;
+  }>({ date: {}, modal: false });
+
   return (
-    <div className="rounded-md grid flex-grow flex-col p-2 max-md:w-[400px] h-[300px]">
+    <div className="rounded-md  grid flex-col p-1   h-[250px]">
       <CalenderHeader
         monthSelected={monthSelected}
         nextMonth={nextMonth}
         previousMonth={previouMonth}
       />
       <Days />
-      <Dates currentDate={currentDate} gerenateCalender={gerenateCalender()} />
+      <Dates
+        setModal={setModalIsOpen}
+        currentDate={currentDate}
+        gerenateCalender={gerenateCalender()}
+      />
+
+      {modalisOpen.modal && (
+        <ModalDateSelected
+          key={"ModalDateSelected"}
+          date={modalisOpen}
+          setModal={setModalIsOpen}
+        />
+      )}
     </div>
   );
 };

@@ -9,7 +9,6 @@ export default function verifyPermissions(
     return true;
   }
   if (permission.includes(userPermission as PermissionsRequired)) {
-    console.log("incluso");
     return true;
   }
   return false;

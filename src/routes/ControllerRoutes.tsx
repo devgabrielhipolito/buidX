@@ -41,7 +41,7 @@ export const ControllerRoutes = () => {
       {isAuthenticated && (
         <Sidenav routes={routes} userPermission={userPermission} />
       )}
-      <section className=" w-full h-screen max-w[90%] ml-[20%] p-7 ">
+      <section className=" w-full h-screen max-w[90%] md:ml-[20%] p-7 ">
         <Routes>{getRoutes()}</Routes>
       </section>
     </section>

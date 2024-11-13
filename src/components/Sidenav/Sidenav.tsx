@@ -16,7 +16,7 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission }) => {
     return routes.map(({ key, path, permission, icon }) => {
       if (verifyPermissions(permission, userPermission)) {
         return (
-          <li>
+          <li key={key}>
             <Link
               onClick={() => setIsMobile(false)}
               className=" flex gap-x-2 text-sm bg-gray-500 p-3 items-center text-gray-300 rounded-md"
@@ -37,7 +37,7 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission }) => {
     <>
       <nav
         className={`fixed  md:flex h-screen flex-col justify-around w-[20%] box-border bg-gray-100 p-4
-          ${isMobile ? "flex" : "hidden md:flex"}
+          ${isMobile ? "flex w-[300px]" : "hidden "}
          `}
       >
         <div className=" h-full flex flex-col  ">

@@ -1,24 +1,18 @@
-import React, { ReactElement, useState } from "react";
+import { useState } from "react";
 
-import dayjs from "dayjs";
 import {
   date,
   getDaysCurrentMonth,
   getFirstDayWeek,
   getPreviousMonth,
+  today,
 } from "../../utils/calender/datesHelper";
 import { months } from "../../utils/calender/CalenderDays";
-
-type TmappedDates = {
-  day: number;
-  type: string;
-};
 
 const useControllerCalender = () => {
   const [currentDate, setCurrentDate] = useState(date.add(0, "month"));
   const monthSelected = months[currentDate.month()];
-  console.log(monthSelected, currentDate.month());
-  
+
   const gerenateCalender = () => {
     const firstDayWeek = getFirstDayWeek(currentDate);
     const daysCurrentMonth = getDaysCurrentMonth(currentDate);
@@ -43,12 +37,21 @@ const useControllerCalender = () => {
     );
 
     return [
-      ...prevLastMonth.map((day) => ({ day, type: "prevLastMonth" })),
+      ...prevLastMonth.map((day) => ({
+        day,
+        type: "prevLastMonth",
+        datafull: `${day}/${currentDate.month()}/${currentDate.year()}`,
+      })),
       ...currentMonthDays.map((day) => ({
         day,
-        type: "previous",
+        type: day === today ? "currentDay" : "previous",
+        datafull: `${day}/${currentDate.month()+1}/${currentDate.year()}`,
       })),
-      ...nextDaysMonth.map((day) => ({ day, type: "nextDaysMonth" })),
+      ...nextDaysMonth.map((day) => ({
+        day,
+        type: "nextDaysMonth",
+        datafull: `${day}/${currentDate.month()+1}/${currentDate.year()}`,
+      })),
     ];
   };
 
@@ -59,31 +62,6 @@ const useControllerCalender = () => {
   const previouMonth = () => {
     setCurrentDate(currentDate.subtract(1, "month"));
   };
-
-  //   dataarray2.forEach(({ day, type }) => {
-  //     if (today === day) {
-  //       setMappedDates([
-  //         ...mappedDates,
-  //         <p className="w-9 text-blue-600 "> {day}</p>,
-  //       ]);
-  //     } else if (today > day) {
-  //       setMappedDates([
-  //         ...mappedDates,
-  //         <p className="w-9  text-sm  text-gray">{day}</p>,
-  //       ]);
-  //     } else if (type === "nextMonthDays" || type === "prevLastMonth") {
-  //       setMappedDates([
-  //         ...mappedDates,
-  //         <p className="w-9  text-gray ">{day}</p>,
-  //       ]);
-  //     } else if (type === "previous") {
-  //       setMappedDates([
-  //         ...mappedDates,
-  //         <p className="w-9 text-white  ">{day}</p>,
-  //       ]);
-  //     }
-  //   });
-  // };
 
   return {
     gerenateCalender,
