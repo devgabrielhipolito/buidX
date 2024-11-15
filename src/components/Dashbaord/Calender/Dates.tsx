@@ -2,6 +2,8 @@ import React, { FC, ReactElement } from "react";
 import { today } from "../../../utils/calender/datesHelper";
 import { Dayjs } from "dayjs";
 import { currentDay, currentMonth } from "../../../utils/calender/currentDate";
+import { useSelector } from "react-redux";
+import { rootState } from "../../../data/redux/reducers";
 
 interface IDatesProps {
   gerenateCalender: {
@@ -21,20 +23,37 @@ const Dates: FC<IDatesProps> = ({
   currentDate,
   setModal,
 }) => {
+  const listDate = useSelector((state: rootState) => state.production.car);
+
   const renderCalender = () => {
     const mappedDates = [] as ReactElement[];
+
     gerenateCalender.forEach(({ day, type, datafull }) => {
-      if (type === "currentDay" && currentDate.month() === currentMonth) {
+      const isCurrentMonth = currentDate.month() === currentMonth;
+      const isPastDay = today > day;
+      const deliveyDay = listDate.find(({ prazo }) => prazo === datafull);
+
+      if (deliveyDay) {
         mappedDates.push(
           <button
             onClick={(e: any) => setModal({ date: datafull, modal: true })}
-            key={"w"}
+            className="w-9 key={day} text-orange-400  text-sm text-center hover:bg-black rounded-md "
+          >
+            {day}
+          </button>
+        );
+      }
+
+     else if (type === "currentDay" && isCurrentMonth) {
+        mappedDates.push(
+          <button
+            onClick={(e: any) => setModal({ date: datafull, modal: true })}
             className="w-9 key={day} text-blue-600 text-sm text-center hover:bg-black rounded-md"
           >
             {day}
           </button>
         );
-      } else if (today > day) {
+      } else if (isPastDay) {
         mappedDates.push(
           <button
             onClick={(e: any) => setModal({ date: datafull, modal: true })}
@@ -67,7 +86,7 @@ const Dates: FC<IDatesProps> = ({
         );
       }
     });
-
+    console.log(mappedDates);
     return mappedDates.flat();
   };
 

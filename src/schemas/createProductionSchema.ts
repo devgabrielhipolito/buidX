@@ -4,10 +4,11 @@ export const createProduction = yup
   .object({
     marca: yup.string().required("O campo marca é obrigatório"),
     modelo: yup.string().required("O campo modelo é obrigatório"),
+    status: yup.string().optional(),
     portas: yup.string().required("O campo portas é obrigatório"),
     cor: yup.string().required("O campo cor é obrigatório"),
     supervisor: yup.string().required("O campo supervisor é obrigatório"),
-    prazo:yup.string().required("A data do prazo é obrigatoria"),
+    prazo: yup.string().required("A data do prazo é obrigatoria"),
     funcionario: yup
       .array()
       .min(1, "O campo funcionario é obrigatório")
@@ -16,3 +17,7 @@ export const createProduction = yup
   .required();
 
 export type createProductionSchema = yup.InferType<typeof createProduction>;
+export type EditProductinSchema = Pick<
+  createProductionSchema,
+  "marca" | "modelo" | "status"
+>;

@@ -35,7 +35,7 @@ const Calender = () => {
       {modalisOpen.modal && (
         <ModalDateSelected
           key={"ModalDateSelected"}
-          date={modalisOpen}
+          date={modalisOpen.date}
           setModal={setModalIsOpen}
         />
       )}

@@ -1,9 +1,10 @@
-import { dados } from "../../../mocks/Dashboard/data";
 import { months } from "../../../utils/calender/CalenderDays";
 import { currentMonth } from "../../../utils/calender/currentDate";
-import { arrayDate } from "../../../utils/grafico/lengthProduction";
+import useLengthProductions from "../../../data/hooks/useLengthProduction";
 
-const Grafico = () => {
+const productionBar = () => {
+  const { arrayDate } = useLengthProductions();
+
   return (
     <section className="flex flex-wrap items-end flex-grow justify-around gap-4">
       {months.map((month) => {
@@ -33,4 +34,4 @@ const Grafico = () => {
   );
 };
 
-export default Grafico;
+export default productionBar;

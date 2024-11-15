@@ -8,6 +8,7 @@ import {
   today,
 } from "../../utils/calender/datesHelper";
 import { months } from "../../utils/calender/CalenderDays";
+import { fixDateNumber } from "../../utils/calender/fixDateNumber";
 
 const useControllerCalender = () => {
   const [currentDate, setCurrentDate] = useState(date.add(0, "month"));
@@ -40,17 +41,26 @@ const useControllerCalender = () => {
       ...prevLastMonth.map((day) => ({
         day,
         type: "prevLastMonth",
-        datafull: `${day}/${currentDate.month()}/${currentDate.year()}`,
+        datafull: fixDateNumber(day, currentDate.month(), currentDate.year()),
+        
       })),
       ...currentMonthDays.map((day) => ({
         day,
         type: day === today ? "currentDay" : "previous",
-        datafull: `${day}/${currentDate.month()+1}/${currentDate.year()}`,
+        datafull: fixDateNumber(
+          day,
+          currentDate.month() + 1,
+          currentDate.year()
+        ),
       })),
       ...nextDaysMonth.map((day) => ({
         day,
         type: "nextDaysMonth",
-        datafull: `${day}/${currentDate.month()+1}/${currentDate.year()}`,
+        datafull: fixDateNumber(
+          day,
+          currentDate.month() + 2,
+          currentDate.year()
+        ),
       })),
     ];
   };

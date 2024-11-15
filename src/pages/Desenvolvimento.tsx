@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ModalCreateProducion from "../components/Modal/ModalCreateProducion";
+import TableDevelopment from "../components/Desenvolvimento/Form/TableDevelopment";
 
 const Desenvolvimento = () => {
   const [modal, setModal] = useState(false);
@@ -19,6 +20,7 @@ const Desenvolvimento = () => {
         </button>
       </header>
       <ModalCreateProducion modal={modal} setModal={setModal} />
+      <TableDevelopment />
     </section>
   );
 };

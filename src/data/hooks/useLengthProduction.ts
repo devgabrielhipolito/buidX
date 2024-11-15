@@ -1,11 +1,18 @@
-import { rootState } from "../../data/redux/reducers";
-import { store } from "../../data/redux/store/store";
-import { months } from "../calender/CalenderDays";
-
 import React from "react";
-  const selectCar = (state: rootState) => state.production.car;
-  export const carItems = selectCar(store.getState());
+import { useSelector } from "react-redux";
+import { rootState } from "../redux/reducers";
+import { months } from "../../utils/calender/CalenderDays";
+
+const useLengthProduction = () => {
+  const carItems = useSelector((state: rootState) => state.production.car);
+  const arrayDate: Array<TDataProduction> = [];
   const regex = /^(?:0?(\d{1,2}))/;
+
+  interface TDataProduction {
+    mes: string;
+    quantidade: number;
+    date: string;
+  }
 
   const countOccurrences = carItems.reduce((acc, { criado }) => {
     const monthNumber = criado.substring(3, 10);
@@ -17,12 +24,6 @@ import React from "react";
     return acc;
   }, {} as Record<string, number>);
 
-  interface TDataProduction {
-    mes: string;
-    quantidade: number;
-    date: string;
-  }
-  export const arrayDate: Array<TDataProduction> = [];
   Object.keys(countOccurrences).map((criado) => {
     const match = criado.match(regex);
     if (match) {
@@ -36,3 +37,14 @@ import React from "react";
     }
   });
 
+  const lengthProduction = arrayDate.reduce(
+    (acc, { quantidade }) => acc + quantidade,
+    0
+  );
+  return {
+    arrayDate,
+    lengthProduction,
+  };
+};
+
+export default useLengthProduction;

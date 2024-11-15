@@ -4,10 +4,10 @@ import currentDate from "../utils/calender/currentDate";
 import { dados } from "../mocks/Dashboard/data";
 import Calender from "../components/Dashbaord/Calender/Calender";
 import Table from "../components/Dashbaord/Tables/Table";
-import Grafico from "../components/Dashbaord/Grafico/Grafico";
+import Grafico from "../components/Dashbaord/Grafico/productionBar";
 import { useSelector } from "react-redux";
 import { rootState } from "../data/redux/reducers";
-import HeaderDashboard from "../components/Dashbaord/Grafico/HeaderDashboard";
+import HeaderDashboard from "../components/Dashbaord/Grafico/ProductionHeader";
 
 const Dashboard = () => {
   
