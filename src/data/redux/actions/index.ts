@@ -16,12 +16,12 @@ export const authenticationSuccess = createAction(
 export const productionRequest = createAction<CarObject>(
   productionActions.PRODUCTION_REQUEST
 );
-export const productionUpdate = createAction<any>(
+export const productionUpdate = createAction<CarObject>(
   productionActions.PRODUCTION_UPDATE
 );
-export const productionSucess = createAction(
+export const productionSucess = createAction<boolean>(
   productionActions.PRODUCTION_SUCCESS
 );
-export const productionCancel = createAction(
-  productionActions.PRODUCTION_CANCEL
+export const productionDelete = createAction(
+  productionActions.PRODUCTION_DELETE
 );

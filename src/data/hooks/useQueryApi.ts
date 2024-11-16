@@ -4,11 +4,13 @@ import { useDispatch } from "react-redux";
 import {
   useAuthenticationUserMutation,
   useProductionCreateMutation,
+  useProductionDeleteMutation,
   useProductionUpdateApiMutation,
 } from "../redux/RtkQuery";
 import {
   authenticationRequest,
   authenticationSuccess,
+  productionDelete,
   productionRequest,
   productionSucess,
   productionUpdate,
@@ -24,6 +26,8 @@ export const useQueryApi = () => {
     useProductionCreateMutation();
   const [productionUpdateApi, { isLoading: isUpdateProduction }] =
     useProductionUpdateApiMutation();
+  const [productionDeleteApi, { isLoading: isDeleted }] =
+    useProductionDeleteMutation();
 
   const mappedFetch: MappedFetchTypes = {
     authentication: {
@@ -34,11 +38,15 @@ export const useQueryApi = () => {
     createProduction: {
       api: productionCreate,
       reducer: productionRequest,
-      reducerSucess: productionSucess,
     },
     productionUpdate: {
       api: productionUpdateApi,
       reducer: productionUpdate,
+    },
+
+    productionDelete: {
+      api: productionDeleteApi,
+      reducer: productionDelete,
     },
   };
 
@@ -58,7 +66,7 @@ export const useQueryApi = () => {
         return setMessage(error);
       }
       setMessage(null);
-      console.log(data)
+      console.log(data);
       dispatch(mappedFetch[action].reducer(data));
       if (mappedFetch[action].reducerSucess) {
         dispatch(mappedFetch[action].reducerSucess(true));

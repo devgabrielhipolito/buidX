@@ -14,12 +14,12 @@ import EditProduction from "../../Modal/ModalEditProduction";
 const GenericsTable: FC<{ data: CarObject[] }> = ({ data }) => {
   const { filterBy, filterData: item } = useTableFilter(data);
   const [isModalOpen, setIsModalOpen] = useState<{
-    data: Pick<
+    carItem: Pick<
       CarObject,
       "_id" | "marca" | "modelo" | "status" | "funcionario" | "supervisor"
     > | null;
     modal: boolean;
-  }>({ data: null, modal: false });
+  }>({ carItem: null, modal: false });
 
   const handleFilter = (item: string) => {
     filterBy(item);
@@ -50,7 +50,10 @@ const GenericsTable: FC<{ data: CarObject[] }> = ({ data }) => {
       </table>
 
       {isModalOpen.modal && (
-        <EditProduction data={isModalOpen.data} setModal={setIsModalOpen} />
+        <EditProduction
+          carItem={isModalOpen.carItem}
+          setModal={setIsModalOpen}
+        />
       )}
     </section>
   );

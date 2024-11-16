@@ -5,7 +5,7 @@ import EditIcon from "../../../assets/imgs/LinksIcons/EditIcon";
 const TableData: FC<{
   item: CarObject[];
   setModal: React.Dispatch<{
-    data: Pick<
+    carItem: Pick<
       CarObject,
       "_id" | "marca" | "modelo" | "status" | "funcionario" | "supervisor"
     >;
@@ -15,7 +15,19 @@ const TableData: FC<{
   return (
     <tbody className=" ">
       {item.map(
-        ({ _id, marca, modelo, supervisor, prazo, criado, status,funcionario }, date) => (
+        (
+          {
+            _id,
+            marca,
+            modelo,
+            supervisor,
+            prazo,
+            criado,
+            status,
+            funcionario,
+          },
+          date
+        ) => (
           <tr
             key={_id}
             className="bg-white text-slate-950 flex justify-between p-2 rounded-lg text-gray m-2 text-[13px]"
@@ -30,7 +42,14 @@ const TableData: FC<{
             <button
               onClick={() =>
                 setModal({
-                  data: { _id, marca, modelo, supervisor, status, funcionario },
+                  carItem: {
+                    _id,
+                    marca,
+                    modelo,
+                    supervisor,
+                    status,
+                    funcionario,
+                  },
                   modal: true,
                 })
               }

@@ -6,6 +6,7 @@ import ComponentsDepoyments from "../components/depoyments/ComponentsDepoyments"
 import Dashboard from "../pages/Dashboard";
 import Desenvolvimento from "../pages/Desenvolvimento";
 import Login from "../pages/Login";
+import Users from "../pages/Users";
 import { PermissionsRequired } from "../types/permissions";
 import { TypeRoutes } from "./types";
 
@@ -47,21 +48,12 @@ export const privateRoutes: TypeRoutes[] = [
       PermissionsRequired.MANAGER,
     ],
   },
+
   {
-    element: <p>ManagerEquip</p>,
-    key: "Gererenciar equipe",
-    icon: <TeamManagerIcon />,
-    path: "/gerenciar-equipe",
-    permission: [
-      PermissionsRequired.EMPLOYEE_MASTER,
-      PermissionsRequired.MANAGER,
-    ],
-  },
-  {
-    element: <p>Acessos</p>,
-    key: "acessos",
+    element: <Users />,
+    key: "Usuarios",
     icon: <AdminIcon />,
-    path: "/",
+    path: "/usuarios",
     permission: [
       PermissionsRequired.EMPLOYEE_MASTER,
       PermissionsRequired.MANAGER,

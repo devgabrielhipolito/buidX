@@ -1,23 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import productionActions from "../actions/productionActions";
-import { productionRequest } from "../actions";
-import { createProductionSchema } from "../../../schemas/createProductionSchema";
 import { CarObject } from "../../types/productionTypes";
 
 interface ProductionType {
-  id?: number | null;
-  is_created: boolean;
+  isSucess: boolean;
   car: CarObject[];
-  status: string;
+  isFailed: boolean;
+  message: string;
 }
 
 const initialState: ProductionType = {
-  id: null,
-  is_created: false,
+  isSucess: false,
+  isFailed: false,
+  message: "",
   car: [],
-  status: "em produção",
 };
-
 const productionReducer = createSlice({
   name: "production",
   initialState,
@@ -38,9 +34,15 @@ const productionReducer = createSlice({
     }),
     PRODUCTION_SUCESS: (state: ProductionType) => ({
       ...state,
-      is_created: true,
+      isSucess: true,
     }),
-    PRODUCTION_CANCEL: () => {},
+    PRODUCTION_DELETE: (
+      state,
+      { payload }: PayloadAction<{ data: CarObject[]; status: string }>
+    ) => ({
+      ...state,
+      car: payload.data,
+    }),
   },
 });
 
@@ -48,7 +50,7 @@ export const {
   PRODUCTION_REQUEST,
   PRODUCTION_UPDATE,
   PRODUCTION_SUCESS,
-  PRODUCTION_CANCEL,
+  PRODUCTION_DELETE,
 } = productionReducer.actions;
 
 export default productionReducer.reducer;

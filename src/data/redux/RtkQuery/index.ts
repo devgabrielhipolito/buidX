@@ -31,8 +31,15 @@ const queryApi = createApi({
       >({
         query: (data) => ({
           url: `/production/updateTask/${data._id}`,
-          body:  data ,
+          body: data,
           method: "POST",
+        }),
+      }),
+
+      productionDelete: builder.mutation<any, any>({
+        query: (id: number) => ({
+          url: `/production/delete/${id}`,
+          method: "DELETE",
         }),
       }),
     };
@@ -43,6 +50,7 @@ export const {
   useAuthenticationUserMutation,
   useProductionCreateMutation,
   useProductionUpdateApiMutation,
+  useProductionDeleteMutation
 } = queryApi;
 
 export default queryApi;

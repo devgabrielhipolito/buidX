@@ -1,7 +1,7 @@
-export const enum PermissionsRequired {
-  NO_ROLE_REQUIRED = "no_role_required",
+export enum PermissionsRequired {
   "EMPLOYEE" = "employee",
   "EMPLOYEE_MASTER" = "employee_master",
   "MANAGER" = "manager",
-  WITHOUT_PERMISSION = "without_permission",
 }
+
+export const permissionArray = Object.values(PermissionsRequired);

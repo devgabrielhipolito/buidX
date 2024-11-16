@@ -1,18 +1,15 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import {
   Control,
   Controller,
   FieldErrors,
   UseFormRegister,
 } from "react-hook-form";
-import {
-  createProductionSchema,
-  EditProductinSchema,
-} from "../../schemas/createProductionSchema";
+import { EditProductinSchema } from "../../schemas/createProductionSchema";
 import { CarObject } from "../../data/types/productionTypes";
 
 interface modalProps {
-  data: Pick<
+  carItem: Pick<
     CarObject,
     "_id" | "marca" | "modelo" | "status" | "funcionario" | "supervisor"
   > | null;
@@ -23,7 +20,7 @@ interface modalProps {
 }
 
 const CarInforUpdates: FC<modalProps> = ({
-  data,
+  carItem,
   control,
   error,
   onSubmit,
@@ -44,7 +41,6 @@ const CarInforUpdates: FC<modalProps> = ({
               {...register("marca")}
               placeholder="Digite a marca"
               className="w-[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[35px] rounded-md text-black"
-              value={data?.marca}
             />
           )}
         />
@@ -63,7 +59,6 @@ const CarInforUpdates: FC<modalProps> = ({
               {...register("modelo")}
               placeholder="Digite o modelo"
               className="w-[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[35px] rounded-md text-black"
-              value={data?.modelo}
             />
           )}
         />
@@ -76,12 +71,21 @@ const CarInforUpdates: FC<modalProps> = ({
             name="status"
             control={control}
             render={() => (
-              <select className="[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[35px] rounded-md text-black">
-                <option selected value="">
-                  {data?.status}
+              <select
+                {...register("status")}
+                className="[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[35px] rounded-md text-black"
+              >
+                <option selected value={carItem?.status}>
+                  {carItem?.status}
                 </option>
-                <option value="">
-                  {!data?.status.includes("Concluido")
+                <option
+                  value={
+                    !carItem?.status.includes("Concluido")
+                      ? "Concluido"
+                      : "Em produção"
+                  }
+                >
+                  {!carItem?.status.includes("Concluido")
                     ? "Concluido"
                     : "Em produção"}
                 </option>

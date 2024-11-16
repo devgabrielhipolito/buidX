@@ -7,8 +7,9 @@ import currentDate from "../../utils/calender/currentDate";
 
 const useStatusUpdate = (carItems: CarObject[]) => {
   const { dispatchAction } = useQueryApi();
+
   const productionCompleted = () => {
-    console.log('oi')
+    console.log("oi");
     carItems.forEach((item, index) => {
       if (currentDate() === item.prazo && item.status === "Em produção") {
         const data = {
