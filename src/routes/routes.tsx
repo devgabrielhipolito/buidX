@@ -1,8 +1,6 @@
 import AdminIcon from "../assets/imgs/LinksIcons/AdminIcon";
 import DashboardIcon from "../assets/imgs/LinksIcons/DashboardIcon";
 import DevelpomentIcon from "../assets/imgs/LinksIcons/DevelpomentIcon";
-import TeamManagerIcon from "../assets/imgs/LinksIcons/TeamManagerIcon";
-import ComponentsDepoyments from "../components/depoyments/ComponentsDepoyments";
 import Dashboard from "../pages/Dashboard";
 import Desenvolvimento from "../pages/Desenvolvimento";
 import Login from "../pages/Login";
@@ -16,12 +14,6 @@ export const publicRoutes: TypeRoutes[] = [
     key: "Login",
     path: "/",
     permission: [PermissionsRequired.EMPLOYEE_MASTER],
-  },
-  {
-    element: <ComponentsDepoyments />,
-    key: "Deployment",
-    path: "/deployment",
-    permission: [PermissionsRequired.EMPLOYEE],
   },
 ];
 

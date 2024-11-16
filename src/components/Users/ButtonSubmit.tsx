@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { FC } from "react";
 
 interface buttonProps {
-    
+  onSubmit: () => void;
 }
 
-const ButtonSubmit = () => {
+const ButtonSubmit: FC<buttonProps> = ({ onSubmit }) => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <div className=" w-full flex  ">
+      <button
+        className="bg-green-600 text-sm w-[100px]text-center p-2 
+      mt-5 rounded-lg m-auto font-semibold text-gray"
+        onClick={onSubmit}
+      >
+        Criar usuário
+      </button>
 
-export default ButtonSubmit
+      <button
+        className="text-gray text-sm w-[100px]text-center p-2 
+      mt-5 rounded-lg mx-auto font-semibold bg-red-600"
+        onClick={onSubmit}
+      >
+        Deletar usuario
+      </button>
+    </div>
+  );
+};
+
+export default ButtonSubmit;

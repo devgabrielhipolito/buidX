@@ -1,15 +1,10 @@
 import React, { FC } from "react";
 import ButtonReturn from "../../assets/imgs/LinksIcons/ButtonReturn";
-import {
-  Control,
-  Controller,
-  FieldErrors,
-  useForm,
-  UseFormRegister,
-} from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { createUser, createUserSchema } from "../../schemas/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { permissionArray } from "../../types/permissions";
+import ButtonSubmit from "../Users/ButtonSubmit";
 interface modalProps {
   modal: boolean;
   setModal: React.Dispatch<boolean>;
@@ -20,23 +15,23 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
     control,
     register,
     handleSubmit,
-    setValue,
-    watch,
     formState: { errors },
   } = useForm<createUserSchema>({
     resolver: yupResolver(createUser),
+  });
+  console.log(errors);
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
   });
 
   if (modal)
     return (
       <section
         className="mt-10 bg-gray-500  p-2 rounded-md
-      h-[500px] 
+      h-[450px] 
       w-[470px]
-      flex
       inset-0
       m-auto
-      p-4
       flex-col
       "
       >
@@ -87,25 +82,6 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
               />
             </label>
 
-            <label
-              className="flex w-[300px] flex-col mb-2 text-gray"
-              htmlFor=""
-            >
-              Email
-              <Controller
-                name="email"
-                control={control}
-                render={() => (
-                  <input
-                    {...register("email")}
-                    type="text"
-                    placeholder="Digite o email"
-                    className=" mt-1 mb-2 bg-gray placeholder:font-normal text-sm  h-[40px] rounded-md text-black"
-                  />
-                )}
-              />
-            </label>
-
             <label className="flex w-[300px] flex-col  text-gray" htmlFor="">
               Senha do usuário
               <Controller
@@ -114,8 +90,8 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
                 render={() => (
                   <input
                     {...register("password")}
-                    type="text"
-                    placeholder="Digite o email"
+                    type="password"
+                    placeholder="Digite a senha"
                     className=" mt-1 bg-gray placeholder:font-normal text-sm  h-[40px] rounded-md text-black"
                   />
                 )}
@@ -128,7 +104,10 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
                 name="permission"
                 control={control}
                 render={() => (
-                  <select className="[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[40px] rounded-md text-black">
+                  <select
+                    {...register("permission")}
+                    className="[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[40px] rounded-md text-black"
+                  >
                     {permissionArray.map((i) => (
                       <option>{i}</option>
                     ))}
@@ -137,6 +116,7 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
               />
             </label>
           </div>
+          <ButtonSubmit onSubmit={onSubmit} />
         </div>
       </section>
     );
