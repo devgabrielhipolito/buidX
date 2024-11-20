@@ -5,6 +5,11 @@ import { createUser, createUserSchema } from "../../schemas/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { permissionArray } from "../../types/permissions";
 import ButtonSubmit from "../Users/ButtonSubmit";
+import { useQueryApi } from "../../data/hooks/useQueryApi";
+import { ActionsApi } from "../../types/useQueryApiTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { createEmployee, createEmployeeUpdate } from "../../data/redux/actions";
+import { rootState } from "../../data/redux/reducers";
 interface modalProps {
   modal: boolean;
   setModal: React.Dispatch<boolean>;
@@ -19,10 +24,20 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
   } = useForm<createUserSchema>({
     resolver: yupResolver(createUser),
   });
+
+  const { dispatchAction } = useQueryApi();
   console.log(errors);
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    dispatchAction({ data, action: ActionsApi.createUser });
   });
+
+  const isSucess = useSelector(
+    (state: rootState) => state.createEmployee.isSucess
+  );
+
+  if (isSucess) {
+    setModal(false);
+  }
 
   if (modal)
     return (

@@ -1,32 +1,28 @@
-import React, {
-  ButtonHTMLAttributes,
-  FC,
-  SyntheticEvent,
-  useState,
-} from "react";
+import { FC, useState } from "react";
 import TableName from "./TableName";
-import { tables } from "../../../utils/tables/tablesHelper";
-import { CarObject } from "../../../data/types/productionTypes";
 import TableData from "./tableData";
 import useTableFilter from "../../../data/hooks/useTableFilter";
-import EditProduction from "../../Modal/ModalEditProduction";
+import { ModalProps } from "../../../types/modalPropsTypes";
 
-const GenericsTable: FC<{ data: CarObject[] }> = ({ data }) => {
+interface TableProps {
+  data: any[];
+  tables: string[];
+  ModalElement: FC<ModalProps>;
+}
+
+const GenericsTable: FC<TableProps> = ({ data, tables, ModalElement }) => {
   const { filterBy, filterData: item } = useTableFilter(data);
   const [isModalOpen, setIsModalOpen] = useState<{
-    carItem: Pick<
-      CarObject,
-      "_id" | "marca" | "modelo" | "status" | "funcionario" | "supervisor"
-    > | null;
+    value: any[] | null;
     modal: boolean;
-  }>({ carItem: null, modal: false });
+  }>({ value: null, modal: false });
 
   const handleFilter = (item: string) => {
     filterBy(item);
   };
 
   return (
-    <section className="rounded-md  w-full h-64 overflow-auto">
+    <section className="rounded-md  w-full h-full ">
       <div className="flex gap-4 m-2 items-center  mr-auto text-gray ">
         <span className="text-sm ">Filtrar:</span>
         <button
@@ -46,14 +42,15 @@ const GenericsTable: FC<{ data: CarObject[] }> = ({ data }) => {
 
       <table className="w-full">
         <TableName handleFilter={handleFilter} tables={tables} />
-        <TableData setModal={setIsModalOpen} item={item ? item : data} />
+        <TableData
+          tables={tables}
+          setModal={setIsModalOpen}
+          item={item ? item : data}
+        />
       </table>
 
       {isModalOpen.modal && (
-        <EditProduction
-          carItem={isModalOpen.carItem}
-          setModal={setIsModalOpen}
-        />
+        <ModalElement value={isModalOpen.value} setModal={setIsModalOpen} />
       )}
     </section>
   );

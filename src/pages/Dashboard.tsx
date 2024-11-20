@@ -10,9 +10,9 @@ import { rootState } from "../data/redux/reducers";
 import HeaderDashboard from "../components/Dashbaord/Grafico/ProductionHeader";
 
 const Dashboard = () => {
-  
+  console.log()
   return (
-    <section className=" dashboard flex flex-col relative  flex-1 gap-3 w-full ">
+    <section className=" dashboard flex flex-col relative justify-center flex gap-3 w-full ">
       <h1 className="text-2xl text-white">
         <span className="text-blue-600">Monitore</span> sua produtividade
       </h1>

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ObjectUser } from "../../../types/authenticationTypes";
 import { CarObject } from "../../types/productionTypes";
+import { createUserObject } from "../../types/createUserTypes";
 
 const queryApi = createApi({
   reducerPath: "queryApi",
@@ -42,6 +43,14 @@ const queryApi = createApi({
           method: "DELETE",
         }),
       }),
+
+      createUserApi: builder.mutation<any, createUserObject>({
+        query: (data) => ({
+          url: "/auth/createuser",
+          body: data,
+          method: "POST",
+        }),
+      }),
     };
   },
 });
@@ -50,7 +59,8 @@ export const {
   useAuthenticationUserMutation,
   useProductionCreateMutation,
   useProductionUpdateApiMutation,
-  useProductionDeleteMutation
+  useProductionDeleteMutation,
+  useCreateUserApiMutation,
 } = queryApi;
 
 export default queryApi;

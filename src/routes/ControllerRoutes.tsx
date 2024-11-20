@@ -10,8 +10,8 @@ export const ControllerRoutes = () => {
   const isAuthenticated = useSelector(
     (state: rootState) => state.authentication.isAuthenticated
   );
-  const userPermission = useSelector(
-    (state: rootState) => state.authentication.userPermission
+  const { user, userPermission } = useSelector(
+    (state: rootState) => state.authentication
   );
   const routes = useMemo(() => {
     if (!isAuthenticated) {
@@ -34,14 +34,22 @@ export const ControllerRoutes = () => {
 
   return (
     <section
-      className={` w-full  relative ${
+      className={` w-full   relative  ${
         isAuthenticated ? " flex h-full bg-black" : ""
       }`}
     >
       {isAuthenticated && (
-        <Sidenav routes={routes} userPermission={userPermission} />
+        <Sidenav
+          routes={routes}
+          userLogged={user?.name}
+          userPermission={userPermission}
+        />
       )}
-      <section className=" w-full h-screen max-w[90%] md:ml-[20%] p-7 ">
+      <section
+        className={` w-full h-screen max-w[90%]  ${
+          isAuthenticated ? "md:ml-[20%]" : ""
+        } p-7 `}
+      >
         <Routes>{getRoutes()}</Routes>
       </section>
     </section>

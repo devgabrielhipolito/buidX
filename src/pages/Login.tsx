@@ -23,7 +23,7 @@ const Login = () => {
   });
 
   return (
-    <section className="h-screen flex flex-col justify-center  items-center">
+    <section className="h-screen   flex flex-col justify-center  items-center">
       <div className="w-[450px] max-sm:w-[90%]">
         <h1 className="text-4xl mb-2">BuildX</h1>
         <p className="mb-5 w-72">

@@ -19,8 +19,12 @@ const Desenvolvimento = () => {
           Criar uma produção
         </button>
       </header>
+
+      <section className=" rounded-md mt-10 bg-gray-100 h-64 ">
+        <TableDevelopment />
+      </section>
+
       <ModalCreateProducion modal={modal} setModal={setModal} />
-      <TableDevelopment />
     </section>
   );
 };

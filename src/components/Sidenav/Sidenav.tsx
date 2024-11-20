@@ -3,15 +3,21 @@ import { TypeRoutes } from "../../routes/types";
 import verifyPermissions from "../../utils/alerts/verifyPermissions";
 import { Link } from "react-router-dom";
 import OpenIcon from "../../assets/imgs/LinksIcons/OpenIcon";
+import { useSelector } from "react-redux";
+import { rootState } from "../../data/redux/reducers";
 
 interface iSidenav {
   routes: TypeRoutes[];
   userPermission: string;
+  userLogged: string | undefined;
 }
 
-const Sidenav: FC<iSidenav> = ({ routes, userPermission }) => {
+const Sidenav: FC<iSidenav> = ({ routes, userPermission, userLogged }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
-
+  const userlogged = useSelector(
+    (state: rootState) => state.authentication.user
+  );
+  console.log(userlogged);
   const linkAllowd = () => {
     return routes.map(({ key, path, permission, icon }) => {
       if (verifyPermissions(permission, userPermission)) {
@@ -65,7 +71,9 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission }) => {
             alt=""
           />
           <div className="  col-span-2">
-            <p className=" col-span-2 text-slate-100">Bem vindo, Gabriel</p>
+            <p className=" col-span-2 text-slate-100">
+              Bem vindo, {userLogged}
+            </p>
             <span className="text-gray-300">{userPermission}</span>
           </div>
         </footer>

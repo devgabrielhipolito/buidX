@@ -12,19 +12,11 @@ import ButtonReturn from "../../assets/imgs/LinksIcons/ButtonReturn";
 import { FC } from "react";
 import { CarObject } from "../../data/types/productionTypes";
 import { ActionsApi } from "../../types/useQueryApiTypes";
+import { ModalProps } from "../../types/modalPropsTypes";
 
-interface modalProps {
-  carItem: Pick<
-    CarObject,
-    "_id" | "marca" | "modelo" | "status" | "funcionario" | "supervisor"
-  > | null;
-  setModal: React.Dispatch<{
-    modal: boolean;
-    carItem: null;
-  }>;
-}
 
-const EditProduction: FC<modalProps> = ({ setModal, carItem }) => {
+
+const ModalEditProduction: FC<ModalProps> = ({ setModal, value }) => {
   const {
     control,
     register,
@@ -34,13 +26,13 @@ const EditProduction: FC<modalProps> = ({ setModal, carItem }) => {
   } = useForm<EditProductinSchema>({
     resolver: yupResolver(createProduction.pick(["marca", "modelo"])),
     defaultValues: {
-      marca: carItem?.marca,
-      modelo: carItem?.modelo,
+      marca: value?.marca,
+      modelo: value?.modelo,
     },
   });
   const { dispatchAction } = useQueryApi();
   const onsubmit = handleSubmit((updaDate) => {
-    const _id = carItem?._id;
+    const _id = value?._id;
     const data = {
       ...updaDate,
       _id,
@@ -49,7 +41,7 @@ const EditProduction: FC<modalProps> = ({ setModal, carItem }) => {
   });
 
   const handleDelete = () => {
-    const data = carItem?._id;
+    const data = value?._id;
     dispatchAction({ action: ActionsApi.productionDelete, data });
   };
 
@@ -57,13 +49,13 @@ const EditProduction: FC<modalProps> = ({ setModal, carItem }) => {
     <section className="absolute inset-0 w-[560px] h-[350px] bg-black m-auto rounded-md ">
       <header className="flex justify-between">
         <h2 className="p-2 text-white font-normal  ">Edite as informações</h2>
-        <button onClick={() => setModal({ modal: false, carItem: null })}>
+        <button onClick={() => setModal({ modal: false, value: null })}>
           <ButtonReturn />
         </button>
       </header>
       <div className="flex mt-4">
         <CarInforUpdates
-          carItem={carItem}
+          carItem={value}
           control={control}
           error={errors}
           onSubmit={onsubmit}
@@ -89,4 +81,4 @@ const EditProduction: FC<modalProps> = ({ setModal, carItem }) => {
   );
 };
 
-export default EditProduction;
+export default ModalEditProduction;

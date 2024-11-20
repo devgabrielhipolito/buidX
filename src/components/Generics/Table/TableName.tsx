@@ -11,6 +11,7 @@ const TableName: FC<{
           <button onClick={() => handleFilter(item)}>{item}</button>
         </th>
       ))}
+      <th className="w-[10%] font-normal text-center ">Actions</th>
     </tr>
   );
 };

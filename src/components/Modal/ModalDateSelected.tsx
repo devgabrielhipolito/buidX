@@ -2,16 +2,11 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { rootState } from "../../data/redux/reducers";
 import GenericsTable from "../Generics/Table/GenericsTable";
+import { CarTables } from "../../utils/tables/tablesHelper";
+import { ModalProps } from "../../types/modalPropsTypes";
+import ModalEditProduction from "./ModalEditProduction";
 
-interface IModal {
-  date: {} | null;
-  setModal: React.Dispatch<{
-    date: {} | null;
-    modal: boolean;
-  }>;
-}
-
-const ModalDateSelected: FC<IModal> = ({ date, setModal }) => {
+const ModalDateSelected: FC<ModalProps> = ({ value, setModal }) => {
   const carItem = useSelector((state: rootState) => state.production.car);
   const data = carItem.sort(({ status }) => status.localeCompare("concluido"));
 
@@ -20,20 +15,26 @@ const ModalDateSelected: FC<IModal> = ({ date, setModal }) => {
       <div className="flex  justify-between">
         <div className="flex justify-center items-center">
           <p className="m-2 text-white ">Prazos de produção por data</p>
-          {date ? (
-            <p className="text-white font-light">{JSON.stringify(date)}</p>
+          {value ? (
+            <p className="text-white font-light">{JSON.stringify(value)}</p>
           ) : (
             <p>vazio</p>
           )}
         </div>
         <button
-          onClick={() => setModal({ modal: false, date })}
+          onClick={() => setModal({ modal: false, value })}
           className="m-2"
         >
           X
         </button>
       </div>
-      {<GenericsTable data={data} />}
+      {
+        <GenericsTable
+          ModalElement={ModalEditProduction}
+          tables={CarTables}
+          data={data}
+        />
+      }
     </section>
   );
 };

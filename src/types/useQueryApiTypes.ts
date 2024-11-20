@@ -5,7 +5,16 @@ export enum ActionsApi {
   createProduction = "createProduction",
   productionUpdate = "productionUpdate",
   productionDelete = "productionDelete",
+  createUser = "createUser",
 }
+
+type teste = {
+  authentication: string;
+  createProduction: string;
+  productionUpdate: string;
+  productionDelete: string;
+  createUser: string;
+};
 
 export type dispatchTypes = {
   data: any;

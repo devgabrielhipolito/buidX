@@ -4,6 +4,7 @@ import { ObjectUser } from "../../../types/authenticationTypes";
 import productionActions from "./productionActions";
 import { CarObject } from "../../types/productionTypes";
 import createUserActions from "./createUserActions";
+import { createUserObject } from "../../types/createUserTypes";
 
 //AUTHENTICATION
 export const authenticationRequest = createAction<ObjectUser>(
@@ -11,6 +12,10 @@ export const authenticationRequest = createAction<ObjectUser>(
 );
 export const authenticationSuccess = createAction(
   authenticationActions.AUTHENTICATION_SUCCESS
+);
+
+export const authenticationLogout = createAction(
+  authenticationActions.AUTHENTICATION_LOGOUT
 );
 
 //PRODUCTION
@@ -28,18 +33,19 @@ export const productionDelete = createAction(
 );
 
 //CREATE_USER
-export const createUser = createAction(createUserActions.CREATE_USER);
-
-export const createUserUpdate = createAction(
-  createUserActions.CREATE_USER_UPDATE
-);
-export const createUserDelete = createAction(
-  createUserActions.CREATE_USER_DELETE
+export const createEmployee = createAction<createUserObject>(
+  createUserActions.CREATE_EMPLOYEE
 );
 
-export const createUserSucess = createAction(
-  createUserActions.CREATE_USER_SUCCESS
+export const createEmployeeUpdate = createAction(
+  createUserActions.CREATE_EMPLOYEE_UPDATE
 );
-export const createUserFailed = createAction(
-  createUserActions.CREATE_USER_FAILED
+export const createEmployeeDelete = createAction(
+  createUserActions.CREATE_EMPLOYEE_DELETE
+);
+export const createEmployeeSucess = createAction(
+  createUserActions.CREATE_EMPLOYEE_SUCCESS
+);
+export const createEmployeeResetSucess = createAction(
+  createUserActions.CREATE_EMPLOYEE_RESET_SUCESS
 );

@@ -3,6 +3,7 @@ import { dispatchTypes, MappedFetchTypes } from "../../types/useQueryApiTypes";
 import { useDispatch } from "react-redux";
 import {
   useAuthenticationUserMutation,
+  useCreateUserApiMutation,
   useProductionCreateMutation,
   useProductionDeleteMutation,
   useProductionUpdateApiMutation,
@@ -10,6 +11,9 @@ import {
 import {
   authenticationRequest,
   authenticationSuccess,
+  createEmployee,
+  createEmployeeSucess,
+  createEmployeeUpdate,
   productionDelete,
   productionRequest,
   productionSucess,
@@ -24,10 +28,15 @@ export const useQueryApi = () => {
     useAuthenticationUserMutation();
   const [productionCreate, { isLoading: isCreatedProduction }] =
     useProductionCreateMutation();
+
   const [productionUpdateApi, { isLoading: isUpdateProduction }] =
     useProductionUpdateApiMutation();
+
   const [productionDeleteApi, { isLoading: isDeleted }] =
     useProductionDeleteMutation();
+
+  const [createUserApi, { isLoading: isCreatedUser }] =
+    useCreateUserApiMutation();
 
   const mappedFetch: MappedFetchTypes = {
     authentication: {
@@ -48,6 +57,11 @@ export const useQueryApi = () => {
       api: productionDeleteApi,
       reducer: productionDelete,
     },
+    createUser: {
+      api: createUserApi,
+      reducer: createEmployee,
+      reducerSucess: createEmployeeSucess,
+    },
   };
 
   const dispatchAction = ({ action, data }: dispatchTypes) => {
@@ -61,17 +75,18 @@ export const useQueryApi = () => {
   const query = ({ action, data }: dispatchTypes) => {
     const api = mappedFetch[action].api(data);
     console.log(data);
-    api.then(({ data, error }) => {
-      if (error) {
-        return setMessage(error);
-      }
-      setMessage(null);
-      console.log(data);
-      dispatch(mappedFetch[action].reducer(data));
-      if (mappedFetch[action].reducerSucess) {
-        dispatch(mappedFetch[action].reducerSucess(true));
-      }
-    });
+    api
+      .then(({ data, error }) => {
+        if (error) {
+          return setMessage(error);
+        }
+        setMessage(null);
+        dispatch(mappedFetch[action].reducer(data));
+        if (mappedFetch[action].reducerSucess) {
+          dispatch(mappedFetch[action].reducerSucess(true));
+        }
+      })
+      .catch((err) => console.log("err"));
   };
   return { dispatchAction, isLoading: isAuthLoading };
 };

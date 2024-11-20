@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import ModalManagerUser from "../components/Modal/ModalManagerUser";
+import { useSelector } from "react-redux";
+import { rootState } from "../data/redux/reducers";
+import IsSucessComponent from "../components/Alerts/IsSucessComponent";
+import GenericsTable from "../components/Generics/Table/GenericsTable";
+import { UserTable } from "../utils/tables/tablesHelper";
+import ModalEditUser from "../components/Modal/ModalEditUser";
 
 const Users = () => {
   const [modal, setModal] = useState(false);
-
+  const listUsers = useSelector(
+    (state: rootState) => state.createEmployee.users
+  );
+  console.log(listUsers);
   return (
     <section className="relative">
       <header className="flex justify-between">
@@ -18,7 +27,16 @@ const Users = () => {
           Criar usuario
         </button>
       </header>
+      <section className="rounded-md mt-10 bg-gray-100 h-96 overflow-auto">
+        <GenericsTable
+          ModalElement={ModalEditUser}
+          data={listUsers}
+          tables={UserTable}
+        />
+      </section>
+
       <ModalManagerUser modal={modal} setModal={setModal} />
+      <IsSucessComponent message="Usuário criado com sucesso" />
     </section>
   );
 };

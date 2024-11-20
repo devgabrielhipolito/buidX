@@ -1,6 +1,7 @@
 import AdminIcon from "../assets/imgs/LinksIcons/AdminIcon";
 import DashboardIcon from "../assets/imgs/LinksIcons/DashboardIcon";
 import DevelpomentIcon from "../assets/imgs/LinksIcons/DevelpomentIcon";
+import Logout from "../components/Logout/Logout";
 import Dashboard from "../pages/Dashboard";
 import Desenvolvimento from "../pages/Desenvolvimento";
 import Login from "../pages/Login";
@@ -13,7 +14,7 @@ export const publicRoutes: TypeRoutes[] = [
     element: <Login />,
     key: "Login",
     path: "/",
-    permission: [PermissionsRequired.EMPLOYEE_MASTER],
+    permission: [PermissionsRequired.NO_ROLE_REQUIRED],
   },
 ];
 
@@ -50,5 +51,11 @@ export const privateRoutes: TypeRoutes[] = [
       PermissionsRequired.EMPLOYEE_MASTER,
       PermissionsRequired.MANAGER,
     ],
+  },
+  {
+    element: <Logout />,
+    key: "Logout",
+    path: "/logout",
+    permission: [PermissionsRequired.NO_ROLE_REQUIRED],
   },
 ];
