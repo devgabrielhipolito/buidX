@@ -2,9 +2,10 @@ import React, { FC } from "react";
 
 interface buttonProps {
   onSubmit: () => void;
+  deleteUser: () => void;
 }
 
-const ButtonSubmit: FC<buttonProps> = ({ onSubmit }) => {
+const ButtonSubmit: FC<buttonProps> = ({ onSubmit, deleteUser }) => {
   return (
     <div className=" w-full flex  ">
       <button
@@ -18,7 +19,7 @@ const ButtonSubmit: FC<buttonProps> = ({ onSubmit }) => {
       <button
         className="text-gray text-sm w-[100px]text-center p-2 
       mt-5 rounded-lg mx-auto font-semibold bg-red-600"
-        onClick={onSubmit}
+        onClick={deleteUser}
       >
         Deletar usuario
       </button>

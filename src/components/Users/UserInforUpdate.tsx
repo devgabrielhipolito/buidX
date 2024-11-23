@@ -33,7 +33,7 @@ const UserInforUpdate: FC<modalProps> = ({
         className="flex flex-col text-[14px]  p-2 text-gray font-semibold"
         htmlFor=""
       >
-        Marca
+        Email
         <Controller
           name="email"
           control={control}
@@ -51,7 +51,7 @@ const UserInforUpdate: FC<modalProps> = ({
         className="flex flex-col text-[14px]  p-2 text-gray font-semibold"
         htmlFor=""
       >
-        Modelo
+        Nome
         <Controller
           name="name"
           control={control}
@@ -67,7 +67,7 @@ const UserInforUpdate: FC<modalProps> = ({
           className="flex flex-col text-[14px]  p-1 text-gray font-semibold"
           htmlFor=""
         >
-          Status
+          Permissão
           <Controller
             name="permission"
             control={control}

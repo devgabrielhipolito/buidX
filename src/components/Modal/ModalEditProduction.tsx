@@ -13,8 +13,9 @@ import { FC } from "react";
 import { CarObject } from "../../data/types/productionTypes";
 import { ActionsApi } from "../../types/useQueryApiTypes";
 import { ModalProps } from "../../types/modalPropsTypes";
-
-
+import ErrorMessage from "../Alerts/ErrorMessage";
+import { useSelector } from "react-redux";
+import { rootState } from "../../data/redux/reducers";
 
 const ModalEditProduction: FC<ModalProps> = ({ setModal, value }) => {
   const {
@@ -40,13 +41,18 @@ const ModalEditProduction: FC<ModalProps> = ({ setModal, value }) => {
     dispatchAction({ action: ActionsApi.productionUpdate, data });
   });
 
+  const message = useSelector(
+    (state: rootState) => state.createEmployee.message
+  );
+
+  console.log(message);
   const handleDelete = () => {
     const data = value?._id;
     dispatchAction({ action: ActionsApi.productionDelete, data });
   };
 
   return (
-    <section className="absolute inset-0 w-[560px] h-[350px] bg-black m-auto rounded-md ">
+    <section className="absolute inset-0 w-[560px] h-[400px] bg-black m-auto rounded-md ">
       <header className="flex justify-between">
         <h2 className="p-2 text-white font-normal  ">Edite as informações</h2>
         <button onClick={() => setModal({ modal: false, value: null })}>
@@ -77,6 +83,7 @@ const ModalEditProduction: FC<ModalProps> = ({ setModal, value }) => {
           Excluir
         </button>
       </div>
+      <ErrorMessage error={errors} message={message} />
     </section>
   );
 };

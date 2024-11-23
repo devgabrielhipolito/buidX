@@ -15,10 +15,10 @@ const IsSucessComponent: FC<SucessProps> = ({ message }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(createEmployeeResetSucess());
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
-  });
+  }, [isSucess, dispatch]);
 
   if (isSucess)
     return (

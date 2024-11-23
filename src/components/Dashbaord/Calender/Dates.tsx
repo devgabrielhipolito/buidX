@@ -13,7 +13,7 @@ interface IDatesProps {
   }[];
   currentDate: Dayjs;
   setModal: React.Dispatch<{
-    date: {} | null;
+    value: {} | null;
     modal: boolean;
   }>;
 }
@@ -36,7 +36,7 @@ const Dates: FC<IDatesProps> = ({
       if (deliveyDay) {
         mappedDates.push(
           <button
-            onClick={(e: any) => setModal({ date: datafull, modal: true })}
+            onClick={(e: any) => setModal({ value: datafull, modal: true })}
             className="w-9 key={day} text-orange-400  text-sm text-center hover:bg-black rounded-md "
           >
             {day}
@@ -47,7 +47,7 @@ const Dates: FC<IDatesProps> = ({
      else if (type === "currentDay" && isCurrentMonth) {
         mappedDates.push(
           <button
-            onClick={(e: any) => setModal({ date: datafull, modal: true })}
+            onClick={(e: any) => setModal({ value: datafull, modal: true })}
             className="w-9 key={day} text-blue-600 text-sm text-center hover:bg-black rounded-md"
           >
             {day}
@@ -56,7 +56,7 @@ const Dates: FC<IDatesProps> = ({
       } else if (isPastDay) {
         mappedDates.push(
           <button
-            onClick={(e: any) => setModal({ date: datafull, modal: true })}
+            onClick={(e: any) => setModal({ value: datafull, modal: true })}
             className="w-9  text-sm  text-gray text-center hover:bg-black rounded-md"
           >
             {day}
@@ -69,7 +69,7 @@ const Dates: FC<IDatesProps> = ({
       ) {
         mappedDates.push(
           <button
-            onClick={(e: any) => setModal({ date: datafull, modal: true })}
+            onClick={(e: any) => setModal({ value: datafull, modal: true })}
             className="w-9  text-gray text-sm text-center content-center hover:bg-black rounded-md "
           >
             {day}
@@ -78,7 +78,7 @@ const Dates: FC<IDatesProps> = ({
       } else if (type === "previous") {
         mappedDates.push(
           <button
-            onClick={(e: any) => setModal({ date: datafull, modal: true })}
+            onClick={(e: any) => setModal({ value: datafull, modal: true })}
             className="w-9 text-white font-medium text-center hover:bg-black rounded-md "
           >
             {day}

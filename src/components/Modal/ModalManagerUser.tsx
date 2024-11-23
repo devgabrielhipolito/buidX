@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import ButtonReturn from "../../assets/imgs/LinksIcons/ButtonReturn";
 import { Controller, useForm } from "react-hook-form";
 import { createUser, createUserSchema } from "../../schemas/auth";
@@ -10,6 +10,7 @@ import { ActionsApi } from "../../types/useQueryApiTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { createEmployee, createEmployeeUpdate } from "../../data/redux/actions";
 import { rootState } from "../../data/redux/reducers";
+import ErrorMessage from "../Alerts/ErrorMessage";
 interface modalProps {
   modal: boolean;
   setModal: React.Dispatch<boolean>;
@@ -24,17 +25,19 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
   } = useForm<createUserSchema>({
     resolver: yupResolver(createUser),
   });
+  const [email, setEmail] = useState<string>();
 
   const { dispatchAction } = useQueryApi();
-  console.log(errors);
   const onSubmit = handleSubmit((data) => {
     dispatchAction({ data, action: ActionsApi.createUser });
   });
 
-  const isSucess = useSelector(
-    (state: rootState) => state.createEmployee.isSucess
-  );
+  const deleterUser = () => {};
 
+  const { isSucess, message } = useSelector(
+    (state: rootState) => state.createEmployee
+  );
+  console.log(errors);
   if (isSucess) {
     setModal(false);
   }
@@ -42,9 +45,9 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
   if (modal)
     return (
       <section
-        className="mt-10 bg-gray-500  p-2 rounded-md
-      h-[450px] 
-      w-[470px]
+        className=" absolute mt-10 bg-gray-500  p-2 rounded-md
+      h-[500px] 
+      w-[500px]
       inset-0
       m-auto
       flex-col
@@ -71,6 +74,7 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
                   <input
                     {...register("email")}
                     type="text"
+                    onBlur={(e) => setEmail(e.currentTarget.value)}
                     placeholder="Digite o email"
                     className="  bg-gray mb-2 placeholder:font-normal text-sm  h-[40px] rounded-md text-black"
                   />
@@ -131,7 +135,8 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
               />
             </label>
           </div>
-          <ButtonSubmit onSubmit={onSubmit} />
+          <ButtonSubmit deleteUser={() => deleterUser()} onSubmit={onSubmit} />
+          <ErrorMessage error={errors} message={message} />
         </div>
       </section>
     );

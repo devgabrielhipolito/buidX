@@ -8,4 +8,4 @@ export const CarTables = [
   "status",
 ];
 
-export const UserTable = ["name", "email", "permission"];
+export const UserTable = ["_id", "name", "email", "permission"];

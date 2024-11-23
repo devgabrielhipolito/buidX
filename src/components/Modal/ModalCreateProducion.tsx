@@ -10,6 +10,7 @@ import {
   createProduction,
   createProductionSchema,
 } from "../../schemas/createProductionSchema";
+import ErrorMessage from "../Alerts/ErrorMessage";
 
 interface IModal {
   modal: boolean;
@@ -62,6 +63,7 @@ const ModalCreateProducion: FC<IModal> = ({ modal, setModal }) => {
         </div>
 
         <ButtonSubmit setModal={setModal} onSubmit={onsubmit} />
+        <ErrorMessage error={errors} />
       </section>
     );
 };

@@ -8,8 +8,8 @@ import ModalEditProduction from "./ModalEditProduction";
 
 const ModalDateSelected: FC<ModalProps> = ({ value, setModal }) => {
   const carItem = useSelector((state: rootState) => state.production.car);
-  const data = carItem.sort(({ status }) => status.localeCompare("concluido"));
-
+  const data = carItem.filter(({ prazo }) => prazo === value);
+  console.log(value);
   return (
     <section className="absolute w-full top-0 left-0 h-[550px] top-10 rounded-md bg-gray-500">
       <div className="flex  justify-between">

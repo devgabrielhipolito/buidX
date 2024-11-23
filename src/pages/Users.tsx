@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ModalManagerUser from "../components/Modal/ModalManagerUser";
 import { useSelector } from "react-redux";
 import { rootState } from "../data/redux/reducers";
@@ -9,10 +9,9 @@ import ModalEditUser from "../components/Modal/ModalEditUser";
 
 const Users = () => {
   const [modal, setModal] = useState(false);
-  const listUsers = useSelector(
-    (state: rootState) => state.createEmployee.users
+  const { users: listUsers, message } = useSelector(
+    (state: rootState) => state.createEmployee
   );
-  console.log(listUsers);
   return (
     <section className="relative">
       <header className="flex justify-between">
@@ -36,7 +35,7 @@ const Users = () => {
       </section>
 
       <ModalManagerUser modal={modal} setModal={setModal} />
-      <IsSucessComponent message="Usuário criado com sucesso" />
+      <IsSucessComponent message={message} />
     </section>
   );
 };

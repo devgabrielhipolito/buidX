@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   useAuthenticationUserMutation,
   useCreateUserApiMutation,
+  useDeleteUserApiMutation,
   useProductionCreateMutation,
   useProductionDeleteMutation,
   useProductionUpdateApiMutation,
@@ -19,6 +20,7 @@ import {
   productionSucess,
   productionUpdate,
 } from "../redux/actions";
+import { CREATE_EMPLOYEE_DELETE } from "../redux/reducers/createEmployeeReducer";
 
 export const useQueryApi = () => {
   const [message, setMessage] = useState(null);
@@ -37,6 +39,9 @@ export const useQueryApi = () => {
 
   const [createUserApi, { isLoading: isCreatedUser }] =
     useCreateUserApiMutation();
+
+  const [deleteUserApi, { isLoading: isDeletedUser }] =
+    useDeleteUserApiMutation();
 
   const mappedFetch: MappedFetchTypes = {
     authentication: {
@@ -60,6 +65,11 @@ export const useQueryApi = () => {
     createUser: {
       api: createUserApi,
       reducer: createEmployee,
+      reducerSucess: createEmployeeSucess,
+    },
+    deleteUser: {
+      api: deleteUserApi,
+      reducer: CREATE_EMPLOYEE_DELETE,
       reducerSucess: createEmployeeSucess,
     },
   };

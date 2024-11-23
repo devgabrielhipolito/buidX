@@ -10,6 +10,7 @@ const TableData: FC<{
     modal: boolean;
   }>;
 }> = ({ item, setModal, tables }) => {
+  console.log(item)
   if (item.length >= 1)
     return (
       <tbody className=" ">

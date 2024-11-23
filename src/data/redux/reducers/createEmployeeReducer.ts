@@ -13,7 +13,7 @@ const initialState: CreateUserType = {
   isSucess: false,
   message: "",
 };
-
+initialState.message = "";
 const createEmployeeReducer = createSlice({
   name: "createEmployee",
   initialState,
@@ -31,8 +31,8 @@ const createEmployeeReducer = createSlice({
       if (allUsers) {
         state.isSucess = true;
         state.users = allUsers;
+        state.message = message;
       }
-      console.log(state.users, message);
       state.message = message;
     },
     CREATE_EMPLOYEE_UPDATE: () => {},
@@ -40,17 +40,39 @@ const createEmployeeReducer = createSlice({
       ...state,
       isSucess: true,
     }),
-    CREATE_USER_DELETE: () => {},
+    CREATE_EMPLOYEE_DELETE: (
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        allUsers: createUserObject[];
+        message: string;
+      }>
+    ) => {
+      const { allUsers, message } = payload;
+      if (allUsers) {
+        state.isSucess = true;
+        state.users = allUsers;
+      }
+      state.message = message;
+    },
     CREATE_EMPLOYEE_RESET_SUCESS: (state) => ({
       ...state,
       isSucess: false,
+      message: "",
     }),
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase("persist/REHYDRATE", (state) => {
+      state.message = "";
+    });
   },
 });
 
 export const {
   CREATE_EMPLOYEE,
-  CREATE_USER_DELETE,
+  CREATE_EMPLOYEE_DELETE,
   CREATE_EMPLOYEE_RESET_SUCESS,
   CREATE_USER_SUCESS,
   CREATE_EMPLOYEE_UPDATE,

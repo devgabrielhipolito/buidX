@@ -46,9 +46,15 @@ const queryApi = createApi({
 
       createUserApi: builder.mutation<any, createUserObject>({
         query: (data) => ({
-          url: "/auth/createuser",
+          url: "/users/createuser",
           body: data,
           method: "POST",
+        }),
+      }),
+      deleteUserApi: builder.mutation<any, any>({
+        query: (id: number) => ({
+          url: `/users/delete/${id}`,
+          method: "DELETE",
         }),
       }),
     };
@@ -61,6 +67,7 @@ export const {
   useProductionUpdateApiMutation,
   useProductionDeleteMutation,
   useCreateUserApiMutation,
+  useDeleteUserApiMutation,
 } = queryApi;
 
 export default queryApi;

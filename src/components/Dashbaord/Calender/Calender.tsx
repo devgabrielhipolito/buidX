@@ -14,9 +14,9 @@ const Calender = () => {
     currentDate,
   } = useControllerCalender();
   const [modalisOpen, setModalIsOpen] = useState<{
-    date: {} | null;
+    value: {} | null;
     modal: boolean;
-  }>({ date: {}, modal: false });
+  }>({ value: {}, modal: false });
 
   return (
     <div className="rounded-md  grid flex-col p-1   h-[250px]">
@@ -35,7 +35,7 @@ const Calender = () => {
       {modalisOpen.modal && (
         <ModalDateSelected
           key={"ModalDateSelected"}
-          date={modalisOpen.date}
+          value={modalisOpen.value}
           setModal={setModalIsOpen}
         />
       )}
