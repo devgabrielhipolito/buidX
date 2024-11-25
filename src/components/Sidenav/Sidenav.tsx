@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import OpenIcon from "../../assets/imgs/LinksIcons/OpenIcon";
 import { useSelector } from "react-redux";
 import { rootState } from "../../data/redux/reducers";
+import NavBar from "../common/Navbar/NavBar";
 
 interface iSidenav {
   routes: TypeRoutes[];
@@ -17,7 +18,7 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission, userLogged }) => {
   const userlogged = useSelector(
     (state: rootState) => state.authentication.user
   );
-  console.log(userlogged);
+
   const linkAllowd = () => {
     return routes.map(({ key, path, permission, icon }) => {
       if (verifyPermissions(permission, userPermission)) {
@@ -41,11 +42,7 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission, userLogged }) => {
 
   return (
     <>
-      <nav
-        className={`fixed  md:flex h-screen flex-col justify-around w-[20%] box-border bg-gray-100 p-4
-          ${isMobile ? "flex w-[300px]" : "hidden "}
-         `}
-      >
+      <NavBar type="sidenav" isMobile={isMobile}>
         <div className=" h-full flex flex-col  ">
           <header className=" flex items-center justify-between  mb-10">
             <h2 className="text-[40px]  text-white">BuildX</h2>
@@ -59,6 +56,7 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission, userLogged }) => {
               </button>
             )}
           </header>
+
           <ul className="flex flex-col justify-between gap-12  ">
             {linkAllowd()}
           </ul>
@@ -77,7 +75,7 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission, userLogged }) => {
             <span className="text-gray-300">{userPermission}</span>
           </div>
         </footer>
-      </nav>
+      </NavBar>
 
       {!isMobile && (
         <button

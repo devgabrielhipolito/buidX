@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .navbar-sidenav {
+    @apply fixed md:flex h-screen flex-col justify-around w-[20%] box-border bg-gray-100 p-4;
+  }
+  .navbar-header {
+    @apply flex  h-[70px]  flex-row justify-between ;
+  }
+  .navbar-mobile {
+    @apply flex w-[300px];
+  }
+  .navbar-desktop {
+    @apply hidden md:flex;
+  }
+}

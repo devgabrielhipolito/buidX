@@ -1,3 +1,4 @@
+@import "./assets/styles/navbar.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,3 +34,4 @@ input[type="checkbox"] {
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(100%);
 }
+
