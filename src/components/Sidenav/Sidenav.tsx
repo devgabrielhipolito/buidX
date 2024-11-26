@@ -5,14 +5,15 @@ import { Link } from "react-router-dom";
 import OpenIcon from "../../assets/imgs/LinksIcons/OpenIcon";
 import { useSelector } from "react-redux";
 import { rootState } from "../../data/redux/reducers";
-import NavBar from "../common/Navbar/NavBar";
+import Profile from "../common/Profile/Profile";
+import { NavBar } from "../common/Navbar";
+import BaseSection from "../common/BaseSection/BaseSection";
 
 interface iSidenav {
   routes: TypeRoutes[];
   userPermission: string;
   userLogged: string | undefined;
 }
-
 const Sidenav: FC<iSidenav> = ({ routes, userPermission, userLogged }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const userlogged = useSelector(
@@ -42,40 +43,16 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission, userLogged }) => {
 
   return (
     <>
-      <NavBar type="sidenav" isMobile={isMobile}>
-        <div className=" h-full flex flex-col  ">
-          <header className=" flex items-center justify-between  mb-10">
-            <h2 className="text-[40px]  text-white">BuildX</h2>
-
-            {isMobile && (
-              <button
-                onClick={() => setIsMobile(!isMobile)}
-                className="   hidden max-md:block  w-[30px] h-[30px] "
-              >
-                <OpenIcon isMobile={isMobile} />
-              </button>
-            )}
-          </header>
-
-          <ul className="flex flex-col justify-between gap-12  ">
-            {linkAllowd()}
-          </ul>
-        </div>
-
-        <footer className="flex justify-center gap-2    items-center ">
-          <img
-            className="rounded-full   h-16"
-            src="https://plus.unsplash.com/premium_photo-1671656349218-5218444643d8?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-          />
-          <div className="  col-span-2">
-            <p className=" col-span-2 text-slate-100">
-              Bem vindo, {userLogged}
-            </p>
-            <span className="text-gray-300">{userPermission}</span>
-          </div>
-        </footer>
-      </NavBar>
+      <NavBar.SideNav>
+        <NavBar.Brand brand="BuidX" />
+        <NavBar.Links links={linkAllowd} />
+        <NavBar.Profile
+          img="
+          https://plus.unsplash.com/premium_photo-1671656349218-5218444643d8?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          permission={userPermission}
+          userLogged={userlogged?.name}
+        />
+      </NavBar.SideNav>
 
       {!isMobile && (
         <button

@@ -6,14 +6,15 @@ import ModalEditProduction from "../components/Modal/ModalEditProduction";
 import { useSelector } from "react-redux";
 import { rootState } from "../data/redux/reducers";
 import { CarTables } from "../utils/tables/tablesHelper";
-import NavBar from "../components/common/Navbar/NavBar";
+import NavBar from "../components/common/Navbar/NavBarContent";
+import BaseSection from "../components/common/BaseSection/BaseSection";
 
 const Desenvolvimento = () => {
   const [modal, setModal] = useState(false);
   const carItems = useSelector((state: rootState) => state.production.car);
 
   return (
-    <section className="relative">
+    <BaseSection>
       <NavBar type="header">
         <h1 className="text-2xl text-white">
           <span className="text-blue-600">Gerencie</span> sua produção
@@ -36,7 +37,7 @@ const Desenvolvimento = () => {
       </section>
 
       <ModalCreateProducion modal={modal} setModal={setModal} />
-    </section>
+    </BaseSection>
   );
 };
 
