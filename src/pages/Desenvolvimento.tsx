@@ -6,8 +6,8 @@ import ModalEditProduction from "../components/Modal/ModalEditProduction";
 import { useSelector } from "react-redux";
 import { rootState } from "../data/redux/reducers";
 import { CarTables } from "../utils/tables/tablesHelper";
-import NavBar from "../components/common/Navbar/NavBarContent";
 import BaseSection from "../components/common/BaseSection/BaseSection";
+import { NavBar } from "../components/common/Navbar";
 
 const Desenvolvimento = () => {
   const [modal, setModal] = useState(false);
@@ -15,18 +15,14 @@ const Desenvolvimento = () => {
 
   return (
     <BaseSection>
-      <NavBar type="header">
-        <h1 className="text-2xl text-white">
-          <span className="text-blue-600">Gerencie</span> sua produção
-        </h1>
+      <NavBar.Header>
+        <NavBar.Titile text="Gerencia sua produção" />
 
-        <button
-          onClick={() => setModal(!modal)}
-          className="bg-white p-2 font-semibold rounded-md text-sm"
-        >
-          Criar uma produção
-        </button>
-      </NavBar>
+        <NavBar.Button
+          onClick={() => setModal(true)}
+          text="Criar uma nova produção"
+        />
+      </NavBar.Header>
 
       <section className=" rounded-md mt-10 bg-gray-100 h-64 ">
         <GenericsTable

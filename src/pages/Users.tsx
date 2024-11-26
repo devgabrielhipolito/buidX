@@ -6,8 +6,8 @@ import IsSucessComponent from "../components/Alerts/IsSucessComponent";
 import GenericsTable from "../components/Generics/Table/GenericsTable";
 import { UserTable } from "../utils/tables/tablesHelper";
 import ModalEditUser from "../components/Modal/ModalEditUser";
-import NavBar from "../components/common/Navbar/NavBarContent";
 import Button from "../components/common/Button/Button";
+import { NavBar } from "../components/common/Navbar";
 
 const Users = () => {
   const [modal, setModal] = useState(false);
@@ -16,12 +16,13 @@ const Users = () => {
   );
   return (
     <section className="relative">
-      <NavBar type="header">
-        <h1 className="text-2xl text-white">
-          <span className="text-blue-600">Genrecie</span> os seus usuarios
-        </h1>
-        <Button textButton="criar usuarios" setModal={setModal} />
-      </NavBar>
+      <NavBar.Header>
+        <NavBar.Titile text="Gerenciar contas de funcionarios" />
+        <NavBar.Button
+          onClick={() => setModal(true)}
+          text="Criar um novo usuário"
+        />
+      </NavBar.Header>
 
       <section className="rounded-md mt-10 bg-gray-100 h-96 overflow-auto">
         <GenericsTable

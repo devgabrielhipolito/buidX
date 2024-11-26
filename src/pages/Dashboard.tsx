@@ -8,16 +8,16 @@ import Grafico from "../components/Dashbaord/Grafico/productionBar";
 import { useSelector } from "react-redux";
 import { rootState } from "../data/redux/reducers";
 import HeaderDashboard from "../components/Dashbaord/Grafico/ProductionHeader";
-import NavBar from "../components/common/Navbar/NavBarContent";
 import BaseSection from "../components/common/BaseSection/BaseSection";
+import { NavBar } from "../components/common/Navbar";
 
 const Dashboard = () => {
   console.log();
   return (
     <BaseSection>
-        <h1 className="text-2xl text-white">
-          <span className="text-blue-600">Monitore</span> sua produtividade
-        </h1>
+      <NavBar.Header>
+        <NavBar.Titile text="Monitore sua produtivdade" />
+      </NavBar.Header>
 
       <div className=" flex flex-wrap flex-grow justify-around gap-4">
         <div className=" grafico flex-grow rounded-md flex flex-col  p-4 bg-gray-100 w-[550px] h-72">
