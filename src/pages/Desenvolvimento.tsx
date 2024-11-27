@@ -24,13 +24,15 @@ const Desenvolvimento = () => {
         />
       </NavBar.Header>
 
-      <section className=" rounded-md mt-10 bg-gray-100 h-64 ">
+      {/* <section className=" rounded-md mt-10 bg-gray-100 h-64 ">
         <GenericsTable
           ModalElement={ModalEditProduction}
           data={carItems}
           tables={CarTables}
         />
-      </section>
+      </section> */}
+
+      
 
       <ModalCreateProducion modal={modal} setModal={setModal} />
     </BaseSection>

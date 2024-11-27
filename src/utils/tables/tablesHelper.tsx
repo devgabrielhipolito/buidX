@@ -1,11 +1,11 @@
 export const CarTables = [
-  "_id",
-  "marca",
-  "modelo",
-  "supervisor",
-  "prazo",
+  "Id",
+  "Marca",
+  "Modelo",
+  "Supervisor",
+  "Prazo",
   "criado",
   "status",
 ];
 
-export const UserTable = ["_id", "name", "email", "permission"];
+export const UserTable = ["Id", "Name", "Email", "Permission"];
