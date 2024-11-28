@@ -5,5 +5,5 @@ interface NavBarHeaderProps {
 }
 
 export function NavBarHeader({ children }: NavBarHeaderProps) {
-  return <nav className="flex justify-between">{children}</nav>;
+  return <nav className="flex justify-between mb-5">{children}</nav>;
 }

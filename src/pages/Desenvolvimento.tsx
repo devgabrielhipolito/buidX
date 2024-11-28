@@ -8,6 +8,7 @@ import { rootState } from "../data/redux/reducers";
 import { CarTables } from "../utils/tables/tablesHelper";
 import BaseSection from "../components/common/BaseSection/BaseSection";
 import { NavBar } from "../components/common/Navbar";
+import { Table } from "../components/common/Tables";
 
 const Desenvolvimento = () => {
   const [modal, setModal] = useState(false);
@@ -32,7 +33,10 @@ const Desenvolvimento = () => {
         />
       </section> */}
 
-      
+      <Table.Root>
+        <Table.Name tables={CarTables} />
+        <Table.Data excludeTables={["portas","__v","funcionario"]} item={carItems} />
+      </Table.Root>
 
       <ModalCreateProducion modal={modal} setModal={setModal} />
     </BaseSection>

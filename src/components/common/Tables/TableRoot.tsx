@@ -3,5 +3,5 @@ interface TableContentProps {
   children: ReactNode;
 }
 export function TableRoot({ children }: TableContentProps) {
-  return <section className="rounded-md  w-full h-full">{children}</section>;
+  return <section className="rounded-md flex flex-col h-[400px] overflow-auto">{children}</section>;
 }

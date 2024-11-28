@@ -35,7 +35,7 @@ const Users = () => {
 
       <Table.Root>
         <Table.Name tables={UserTable} />
-        <Table.Data tables={} item={listUsers} />
+        <Table.Data excludeTables={["password", "__v"]} item={listUsers} />
       </Table.Root>
 
       <ModalManagerUser modal={modal} setModal={setModal} />

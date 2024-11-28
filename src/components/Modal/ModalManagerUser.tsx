@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createEmployee, createEmployeeUpdate } from "../../data/redux/actions";
 import { rootState } from "../../data/redux/reducers";
 import ErrorMessage from "../Alerts/ErrorMessage";
+import { NavBar } from "../common/Navbar";
+import FormInput from "../common/Form/FormInput";
 interface modalProps {
   modal: boolean;
   setModal: React.Dispatch<boolean>;
@@ -54,12 +56,10 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
       "
       >
         <div>
-          <header className="flex w-full justify-between">
-            <h2 className="p-2 text-gray font-semibold ">Criar usuarios</h2>
-            <button onClick={() => setModal(false)}>
-              <ButtonReturn />
-            </button>
-          </header>
+          <NavBar.Header>
+            <NavBar.Titile text="Criar usuarios" />
+            <NavBar.Button onClick={() => setModal(false)} text="fechar" />
+          </NavBar.Header>
           <hr className="text-gray mb-2" />
           <div className="flex  justify-center text-sm font-light flex-col items-left">
             <label
