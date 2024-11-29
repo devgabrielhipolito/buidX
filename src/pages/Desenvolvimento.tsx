@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import ModalCreateProducion from "../components/Modal/ModalCreateProducion";
-import TableDevelopment from "../components/Desenvolvimento/Form/TableDevelopment";
-import GenericsTable from "../components/Generics/Table/GenericsTable";
-import ModalEditProduction from "../components/Modal/ModalEditProduction";
 import { useSelector } from "react-redux";
 import { rootState } from "../data/redux/reducers";
 import { CarTables } from "../utils/tables/tablesHelper";
@@ -35,7 +32,10 @@ const Desenvolvimento = () => {
 
       <Table.Root>
         <Table.Name tables={CarTables} />
-        <Table.Data excludeTables={["portas","__v","funcionario"]} item={carItems} />
+        <Table.Data
+          excludeTables={["portas", "__v", "funcionario"]}
+          item={carItems}
+        />
       </Table.Root>
 
       <ModalCreateProducion modal={modal} setModal={setModal} />

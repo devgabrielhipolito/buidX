@@ -1,9 +1,12 @@
 import React, { FC, ReactElement } from "react";
-import { today } from "../../../utils/calender/datesHelper";
+import { today } from "../../../../utils/calender/datesHelper";
 import { Dayjs } from "dayjs";
-import { currentDay, currentMonth } from "../../../utils/calender/currentDate";
+import {
+  currentDay,
+  currentMonth,
+} from "../../../../utils/calender/currentDate";
 import { useSelector } from "react-redux";
-import { rootState } from "../../../data/redux/reducers";
+import { rootState } from "../../../../data/redux/reducers";
 
 interface IDatesProps {
   gerenateCalender: {
@@ -42,9 +45,7 @@ const Dates: FC<IDatesProps> = ({
             {day}
           </button>
         );
-      }
-
-     else if (type === "currentDay" && isCurrentMonth) {
+      } else if (type === "currentDay" && isCurrentMonth) {
         mappedDates.push(
           <button
             onClick={(e: any) => setModal({ value: datafull, modal: true })}

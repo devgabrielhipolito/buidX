@@ -6,7 +6,7 @@ import {
   FieldErrors,
   UseFormRegister,
 } from "react-hook-form";
-import { createProductionSchema } from "../../../schemas/createProductionSchema";
+import { createProductionSchema } from "../../../../schemas/createProductionSchema";
 
 interface IForm {
   onSubmit: () => void;

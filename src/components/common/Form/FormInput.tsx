@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from "react";
 
 interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-export default function FormInput({ placeholder, ...rest }: FormInputProps) {
+export default function FormInput({  ...rest }: FormInputProps) {
   return (
     <input
       {...rest}

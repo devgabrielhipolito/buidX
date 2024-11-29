@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { tables } from "../../../utils/tables/tablesHelper";
+import { tables } from "../../../../utils/tables/tablesHelper";
 
 const NameTable = () => {
   return (

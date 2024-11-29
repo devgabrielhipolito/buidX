@@ -2,12 +2,12 @@ import React, { memo } from "react";
 import { months } from "../utils/calender/CalenderDays";
 import currentDate from "../utils/calender/currentDate";
 import { dados } from "../mocks/Dashboard/data";
-import Calender from "../components/Dashbaord/Calender/Calender";
-import Table from "../components/Dashbaord/Tables/Table";
-import Grafico from "../components/Dashbaord/Grafico/productionBar";
+import Calender from "../components/layouts/Dashboard/Calender/Calender";
+import Table from "../components/layouts/Dashboard/Tables/Table";
+import Grafico from "../components/layouts/Dashboard/Grafico/productionBar";
 import { useSelector } from "react-redux";
 import { rootState } from "../data/redux/reducers";
-import HeaderDashboard from "../components/Dashbaord/Grafico/ProductionHeader";
+import HeaderDashboard from "../components/layouts/Dashboard/Grafico/ProductionHeader";
 import BaseSection from "../components/common/BaseSection/BaseSection";
 import { NavBar } from "../components/common/Navbar";
 

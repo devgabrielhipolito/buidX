@@ -6,7 +6,7 @@ interface FormLabelProps {
 }
 export function FormLabel({ children, text }: FormLabelProps) {
   return (
-    <label>
+    <label className=" w-[300px] flex flex-col mb-2 m-1 text-gray">
       {text}
       {children}
     </label>

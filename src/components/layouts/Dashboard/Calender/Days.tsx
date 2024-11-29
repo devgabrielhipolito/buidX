@@ -1,5 +1,5 @@
 import React from "react";
-import { DaysWeek } from "../../../utils/calender/CalenderDays";
+import { DaysWeek } from "../../../../utils/calender/CalenderDays";
 
 const Days = () => {
   return (

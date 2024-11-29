@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { createUser, createUserSchema } from "../../schemas/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { permissionArray } from "../../types/permissions";
-import ButtonSubmit from "../Users/ButtonSubmit";
+import ButtonSubmit from "../layouts/Users/ButtonSubmit";
 import { useQueryApi } from "../../data/hooks/useQueryApi";
 import { ActionsApi } from "../../types/useQueryApiTypes";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,8 @@ import { rootState } from "../../data/redux/reducers";
 import ErrorMessage from "../Alerts/ErrorMessage";
 import { NavBar } from "../common/Navbar";
 import FormInput from "../common/Form/FormInput";
+import { Modal } from "../common/Modal";
+import { Form } from "../common/Form";
 interface modalProps {
   modal: boolean;
   setModal: React.Dispatch<boolean>;
@@ -46,99 +48,76 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
 
   if (modal)
     return (
-      <section
-        className=" absolute mt-10 bg-gray-500  p-2 rounded-md
-      h-[500px] 
-      w-[500px]
-      inset-0
-      m-auto
-      flex-col
-      "
-      >
-        <div>
-          <NavBar.Header>
-            <NavBar.Titile text="Criar usuarios" />
-            <NavBar.Button onClick={() => setModal(false)} text="fechar" />
-          </NavBar.Header>
-          <hr className="text-gray mb-2" />
-          <div className="flex  justify-center text-sm font-light flex-col items-left">
-            <label
-              className=" w-[300px] flex flex-col mb-2 m-1 text-gray"
-              htmlFor=""
-            >
-              Email
-              <Controller
-                name="email"
-                control={control}
-                render={() => (
-                  <input
-                    {...register("email")}
-                    type="text"
-                    onBlur={(e) => setEmail(e.currentTarget.value)}
-                    placeholder="Digite o email"
-                    className="  bg-gray mb-2 placeholder:font-normal text-sm  h-[40px] rounded-md text-black"
-                  />
-                )}
-              />
-            </label>
+      <Modal.Content>
+        <NavBar.Header>
+          <NavBar.Titile text="Criar usuarios" />
+          <NavBar.Button onClick={() => setModal(false)} text="fechar" />
+        </NavBar.Header>
+        <hr className="text-gray mb-2" />
+        <Form.Content>
+          <Form.Label text="Email">
+            <Controller
+              name="email"
+              control={control}
+              render={() => (
+                <Form.Input
+                  {...register("email")}
+                  type="text"
+                  placeholder="Digite o email"
+                />
+              )}
+            />
+          </Form.Label>
 
-            <label
-              className="flex w-[300px] flex-col mb-2 text-gray"
-              htmlFor=""
-            >
-              Nome do usuário
-              <Controller
-                name="name"
-                control={control}
-                render={() => (
-                  <input
-                    {...register("name")}
-                    type="text"
-                    placeholder="Digite o nome"
-                    className=" mt-1 bg-gray placeholder:font-normal text-sm  h-[40px] rounded-md text-black"
-                  />
-                )}
-              />
-            </label>
+          <Form.Label text="Nome do funcionário">
+            <Controller
+              name="name"
+              control={control}
+              render={() => (
+                <Form.Input
+                  {...register("name")}
+                  type="text"
+                  placeholder="Digite o nome"
+                />
+              )}
+            />
+          </Form.Label>
 
-            <label className="flex w-[300px] flex-col  text-gray" htmlFor="">
-              Senha do usuário
-              <Controller
-                name="password"
-                control={control}
-                render={() => (
-                  <input
-                    {...register("password")}
-                    type="password"
-                    placeholder="Digite a senha"
-                    className=" mt-1 bg-gray placeholder:font-normal text-sm  h-[40px] rounded-md text-black"
-                  />
-                )}
-              />
-            </label>
+          <Form.Label text="Senha do usuário">
+            <Controller
+              name="password"
+              control={control}
+              render={() => (
+                <Form.Input
+                  {...register("password")}
+                  type="password"
+                  placeholder="Digite a senha"
+                />
+              )}
+            />
+          </Form.Label>
 
-            <label className="flex flex-col text-[14px] mr-auto w-[200px]  p-1 text-gray font-semibold">
-              Tipo de funcionário
-              <Controller
-                name="permission"
-                control={control}
-                render={() => (
-                  <select
-                    {...register("permission")}
-                    className="[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[40px] rounded-md text-black"
-                  >
-                    {permissionArray.map((i) => (
-                      <option>{i}</option>
-                    ))}
-                  </select>
-                )}
-              />
-            </label>
-          </div>
-          <ButtonSubmit deleteUser={() => deleterUser()} onSubmit={onSubmit} />
-          <ErrorMessage error={errors} message={message} />
-        </div>
-      </section>
+          <label className="flex flex-col text-[14px] mr-auto w-[200px]  p-1 text-gray font-semibold">
+            Tipo de funcionário
+            <Controller
+              name="permission"
+              control={control}
+              render={() => (
+                <select
+                  {...register("permission")}
+                  className="[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[40px] rounded-md text-black"
+                >
+                  {permissionArray.map((i) => (
+                    <option>{i}</option>
+                  ))}
+                </select>
+              )}
+            />
+          </label>
+        </Form.Content>
+        <ButtonSubmit deleteUser={() => deleterUser()} onSubmit={onSubmit} />
+        <ErrorMessage error={errors} message={message} />
+      </Modal.Content>
     );
 };
 

@@ -1,8 +1,8 @@
 import React, { FC, ReactElement, ReactNode, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { rootState } from "../../../data/redux/reducers";
-import useStatusUpdate from "../../../data/hooks/useStatusUpdate";
-import currentDate from "../../../utils/calender/currentDate";
+import { rootState } from "../../../../data/redux/reducers";
+import useStatusUpdate from "../../../../data/hooks/useStatusUpdate";
+import currentDate from "../../../../utils/calender/currentDate";
 
 const TableItems = () => {
   const carItems = useSelector((state: rootState) => state.production.car);

@@ -5,9 +5,10 @@ import {
   FieldErrors,
   UseFormRegister,
 } from "react-hook-form";
-import { createUserObject } from "../../data/types/createUserTypes";
-import { createUserSchema } from "../../schemas/auth";
-import { permissionArray } from "../../types/permissions";
+import { createUserObject } from "../../../data/types/createUserTypes";
+import { createUserSchema } from "../../../schemas/auth";
+import { permissionArray } from "../../../types/permissions";
+import { Form } from "../../common/Form";
 
 interface modalProps {
   userItem: Pick<
@@ -28,30 +29,22 @@ const UserInforUpdate: FC<modalProps> = ({
   register,
 }) => {
   return (
-    <div>
-      <label
-        className="flex flex-col text-[14px]  p-2 text-gray font-semibold"
-        htmlFor=""
-      >
-        Email
+    <Form.Content>
+      <Form.Label text="Email">
         <Controller
           name="email"
           control={control}
           render={() => (
-            <input
+            <Form.Input
               {...register("email")}
               placeholder="Digite o email"
-              className="w-full mt-1 bg-gray placeholder:font-normal text-sm  h-[35px] rounded-md text-black"
+              type="text"
             />
           )}
         />
-      </label>
+      </Form.Label>
 
-      <label
-        className="flex flex-col text-[14px]  p-2 text-gray font-semibold"
-        htmlFor=""
-      >
-        Nome
+      <Form.Label text="Nome">
         <Controller
           name="name"
           control={control}
@@ -59,23 +52,16 @@ const UserInforUpdate: FC<modalProps> = ({
             <input
               {...register("name")}
               placeholder="Digite o nome"
-              className="w-full mt-1 bg-gray placeholder:font-normal text-sm  h-[35px] rounded-md text-black"
+              type="text"
             />
           )}
         />
-        <label
-          className="flex flex-col text-[14px]  p-1 text-gray font-semibold"
-          htmlFor=""
-        >
-          Permissão
+        <Form.Label text="Permissão">
           <Controller
             name="permission"
             control={control}
             render={() => (
-              <select
-                {...register("permission")}
-                className="w-full  mt-1 bg-gray placeholder:font-normal text-sm  h-[35px] rounded-md text-black"
-              >
+              <Form.Select {...register("permission")}>
                 <option selected value={userItem?.permission}>
                   {userItem?.permission}
                 </option>
@@ -87,12 +73,12 @@ const UserInforUpdate: FC<modalProps> = ({
                     </option>
                   ))}
                 <option value=""></option>
-              </select>
+              </Form.Select>
             )}
           />
-        </label>
-      </label>
-    </div>
+        </Form.Label>
+      </Form.Label>
+    </Form.Content>
   );
 };
 

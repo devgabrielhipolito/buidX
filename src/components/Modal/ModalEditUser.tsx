@@ -4,7 +4,7 @@ import ButtonReturn from "../../assets/imgs/LinksIcons/ButtonReturn";
 import { createUser, createUserSchema } from "../../schemas/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import UserInforUpdate from "../Users/UserInforUpdate";
+import UserInforUpdate from "../layouts/Users/UserInforUpdate";
 import { useQueryApi } from "../../data/hooks/useQueryApi";
 import { ActionsApi } from "../../types/useQueryApiTypes";
 import { useSelector } from "react-redux";
@@ -49,6 +49,7 @@ const ModalEditUser: FC<ModalProps> = ({ setModal, value }) => {
           <ButtonReturn />
         </button>
       </header>
+
       <UserInforUpdate
         control={control}
         error={errors}

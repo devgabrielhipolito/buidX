@@ -1,5 +1,5 @@
 import { memo } from "react";
-import ComponentLogin from "../components/Login/ComponentLogin";
+import ComponentLogin from "../components/layouts/Login/ComponentLogin";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   useForm,
