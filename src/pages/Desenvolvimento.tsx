@@ -30,7 +30,7 @@ const Desenvolvimento = () => {
         />
       </section> */}
 
-      <Table.Root>
+      <Table.Root style={{ height: "400px" }}>
         <Table.Name tables={CarTables} />
         <Table.Data
           excludeTables={["portas", "__v", "funcionario"]}

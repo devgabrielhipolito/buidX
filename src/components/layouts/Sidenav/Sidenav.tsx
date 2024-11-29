@@ -1,13 +1,13 @@
 import React, { FC, useState } from "react";
-import { TypeRoutes } from "../../routes/types";
-import verifyPermissions from "../../utils/alerts/verifyPermissions";
+import { TypeRoutes } from "../../../routes/types";
+import verifyPermissions from "../../../utils/alerts/verifyPermissions";
 import { Link } from "react-router-dom";
-import OpenIcon from "../../assets/imgs/LinksIcons/OpenIcon";
+import OpenIcon from "../../../assets/imgs/LinksIcons/OpenIcon";
 import { useSelector } from "react-redux";
-import { rootState } from "../../data/redux/reducers";
-import Profile from "../common/Profile/Profile";
-import { NavBar } from "../common/Navbar";
-import BaseSection from "../common/BaseSection/BaseSection";
+import { rootState } from "../../../data/redux/reducers";
+import Profile from "../../common/Profile/Profile";
+import { NavBar } from "../../common/Navbar";
+import BaseSection from "../../common/BaseSection/BaseSection";
 
 interface iSidenav {
   routes: TypeRoutes[];

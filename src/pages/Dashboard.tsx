@@ -3,16 +3,18 @@ import { months } from "../utils/calender/CalenderDays";
 import currentDate from "../utils/calender/currentDate";
 import { dados } from "../mocks/Dashboard/data";
 import Calender from "../components/layouts/Dashboard/Calender/Calender";
-import Table from "../components/layouts/Dashboard/Tables/Table";
 import Grafico from "../components/layouts/Dashboard/Grafico/productionBar";
 import { useSelector } from "react-redux";
 import { rootState } from "../data/redux/reducers";
 import HeaderDashboard from "../components/layouts/Dashboard/Grafico/ProductionHeader";
 import BaseSection from "../components/common/BaseSection/BaseSection";
 import { NavBar } from "../components/common/Navbar";
+import { Table } from "../components/common/Tables";
+import { CarTables } from "../utils/tables/tablesHelper";
 
 const Dashboard = () => {
-  console.log();
+  const carItem = useSelector((state: rootState) => state.production.car);
+
   return (
     <BaseSection>
       <NavBar.Header>
@@ -30,8 +32,13 @@ const Dashboard = () => {
           <Calender />
         </div>
       </div>
-
-      <Table />
+      <Table.Root style={{ height: "250px" }}>
+        <Table.Name tables={CarTables} />
+        <Table.Data
+          excludeTables={["portas", "__v", "funcionario"]}
+          item={carItem}
+        />
+      </Table.Root>
     </BaseSection>
   );
 };

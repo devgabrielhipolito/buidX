@@ -4,7 +4,7 @@ import { ReactElement, useCallback, useMemo } from "react";
 import { privateRoutes, publicRoutes } from "./routes";
 import { Route, Routes } from "react-router-dom";
 import verifyPermissions from "../utils/alerts/verifyPermissions";
-import Sidenav from "../components/Sidenav/Sidenav";
+import Sidenav from "../components/layouts/Sidenav/Sidenav";
 
 export const ControllerRoutes = () => {
   const isAuthenticated = useSelector(
