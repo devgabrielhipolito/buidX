@@ -25,21 +25,14 @@ const Users = () => {
         />
       </NavBar.Header>
 
-      {/* <section className="rounded-md mt-10 bg-gray-100 h-96 overflow-auto">
-        <GenericsTable
-          ModalElement={ModalEditUser}
-          data={listUsers}
-          tables={UserTable}
-        />
-      </section> */}
-
       <Table.Root>
         <Table.Name tables={UserTable} />
         <Table.Data excludeTables={["password", "__v"]} item={listUsers} />
+        <Table.Modal ModalElement={ModalEditUser} />
       </Table.Root>
 
       <ModalManagerUser modal={modal} setModal={setModal} />
-      <IsSucessComponent message={message} />
+      {/* <IsSucessComponent message={message} /> */}
     </section>
   );
 };

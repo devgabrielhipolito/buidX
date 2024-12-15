@@ -5,8 +5,8 @@ import {
   FieldErrors,
   UseFormRegister,
 } from "react-hook-form";
-import { EditProductinSchema } from "../../schemas/createProductionSchema";
-import { CarObject } from "../../data/types/productionTypes";
+import { EditProductinSchema } from "../../../../schemas/createProductionSchema";
+import { CarObject } from "../../../../data/types/productionTypes";
 
 interface modalProps {
   carItem: Pick<

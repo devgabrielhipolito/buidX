@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { ModalProps } from "../../types/modalPropsTypes";
-import ButtonReturn from "../../assets/imgs/LinksIcons/ButtonReturn";
+import ButtonClose from "../../assets/imgs/LinksIcons/ButtonClose";
 import { createUser, createUserSchema } from "../../schemas/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -9,13 +9,14 @@ import { useQueryApi } from "../../data/hooks/useQueryApi";
 import { ActionsApi } from "../../types/useQueryApiTypes";
 import { useSelector } from "react-redux";
 import { rootState } from "../../data/redux/reducers";
+import { TableContext } from "../../data/context/TableProvider";
 
-const ModalEditUser: FC<ModalProps> = ({ setModal, value }) => {
+const ModalEditUser = () => {
+  const { value, setValue } = useContext(TableContext);
   const {
     control,
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<createUserSchema>({
     resolver: yupResolver(createUser),
@@ -26,27 +27,26 @@ const ModalEditUser: FC<ModalProps> = ({ setModal, value }) => {
     },
   });
   const { dispatchAction } = useQueryApi();
+
   const isSucess = useSelector(
     (state: rootState) => state.createEmployee.isSucess
   );
+
   const onSubmit = handleSubmit((data) => {
     console.log(data);
   });
+
   const handleDelete = () => {
     const data = value?._id;
     dispatchAction({ data, action: ActionsApi.deleteUser });
   };
 
-  if (isSucess) {
-    setModal({ modal: false, value });
-  }
-
   return (
     <div className="absolute inset-0 w-[400px] h-[350px] bg-black m-auto rounded-md top-20">
       <header className="flex justify-between">
         <h2 className="p-2 text-white font-normal  ">Edite as informações</h2>
-        <button onClick={() => setModal({ modal: false, value: null })}>
-          <ButtonReturn />
+        <button onClick={() => setValue({ modal: false, value: null })}>
+          <ButtonClose />
         </button>
       </header>
 
@@ -56,6 +56,11 @@ const ModalEditUser: FC<ModalProps> = ({ setModal, value }) => {
         onSubmit={onSubmit}
         register={register}
         userItem={value}
+        defafultValues={{
+          email: value.email,
+          name: value.name,
+          permission: value.permission | "",
+        }} 
       />
 
       <div className=" mt-3 text-center font-semibold text-gray">

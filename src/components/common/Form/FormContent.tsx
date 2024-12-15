@@ -1,12 +1,15 @@
-import React, { ReactNode } from "react";
+import React, { HtmlHTMLAttributes, ReactNode } from "react";
 
-interface FormContentProps {
+interface FormContentProps extends HtmlHTMLAttributes<HTMLElement> {
   children: ReactNode;
 }
 
-export function FormContent({ children }: FormContentProps) {
+export function FormContent({ children, ...rest }: FormContentProps) {
   return (
-    <section className="flex  justify-center text-sm font-light flex-col items-left">
+    <section
+      {...rest}
+      className="flex justify-between text-sm font-light flex-col "
+    >
       {children}
     </section>
   );

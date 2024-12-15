@@ -1,12 +1,20 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes, forwardRef } from "react";
 
-interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {}
-
-export default function FormInput({  ...rest }: FormInputProps) {
-  return (
-    <input
-      {...rest}
-      className=' mt-1 bg-gray placeholder:font-normal text-sm  h-[40px] rounded-md text-black"'
-    />
-  );
+interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  value?: string;
 }
+
+const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
+  ({ value, ...rest }, ref) => {
+    return (
+      <input
+        {...rest}
+        ref={ref}
+        value={value}
+        className="bg-black mt-1 placeholder:font-normal text-sm h-[40px] border-black rounded-md text-white"
+      />
+    );
+  }
+);
+
+export default FormInput;

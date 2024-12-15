@@ -8,16 +8,18 @@ import {
   useProductionCreateMutation,
   useProductionDeleteMutation,
   useProductionUpdateApiMutation,
+  useRequestUserMutation,
 } from "../redux/RtkQuery";
 import {
   authenticationRequest,
   authenticationSuccess,
   createEmployee,
+  createEmployeeRequest,
   createEmployeeSucess,
   createEmployeeUpdate,
   productionDelete,
   productionRequest,
-  productionSucess,
+  productionSuccess,
   productionUpdate,
 } from "../redux/actions";
 import { CREATE_EMPLOYEE_DELETE } from "../redux/reducers/createEmployeeReducer";
@@ -42,8 +44,12 @@ export const useQueryApi = () => {
 
   const [deleteUserApi, { isLoading: isDeletedUser }] =
     useDeleteUserApiMutation();
-
+  const [requestUser] = useRequestUserMutation();
   const mappedFetch: MappedFetchTypes = {
+    requestUser: {
+      api: requestUser,
+      reducer: createEmployeeRequest,
+    },
     authentication: {
       api: authenticationUser,
       reducer: authenticationRequest,
@@ -52,6 +58,7 @@ export const useQueryApi = () => {
     createProduction: {
       api: productionCreate,
       reducer: productionRequest,
+      reducerSucess: productionSuccess,
     },
     productionUpdate: {
       api: productionUpdateApi,
@@ -84,7 +91,6 @@ export const useQueryApi = () => {
 
   const query = ({ action, data }: dispatchTypes) => {
     const api = mappedFetch[action].api(data);
-    console.log(data);
     api
       .then(({ data, error }) => {
         if (error) {
@@ -92,7 +98,7 @@ export const useQueryApi = () => {
         }
         setMessage(null);
         dispatch(mappedFetch[action].reducer(data));
-        if (mappedFetch[action].reducerSucess) {
+        if (mappedFetch[action].reducerSucess && data.status === "concluido") {
           dispatch(mappedFetch[action].reducerSucess(true));
         }
       })

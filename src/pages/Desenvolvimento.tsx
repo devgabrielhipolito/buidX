@@ -6,30 +6,23 @@ import { CarTables } from "../utils/tables/tablesHelper";
 import BaseSection from "../components/common/BaseSection/BaseSection";
 import { NavBar } from "../components/common/Navbar";
 import { Table } from "../components/common/Tables";
+import IsSucessComponent from "../components/Alerts/IsSucessComponent";
 
 const Desenvolvimento = () => {
   const [modal, setModal] = useState(false);
-  const carItems = useSelector((state: rootState) => state.production.car);
+  const { car: carItems, isSucess } = useSelector(
+    (state: rootState) => state.production
+  );
 
   return (
     <BaseSection>
       <NavBar.Header>
         <NavBar.Titile text="Gerencia sua produção" />
-
         <NavBar.Button
           onClick={() => setModal(true)}
           text="Criar uma nova produção"
         />
       </NavBar.Header>
-
-      {/* <section className=" rounded-md mt-10 bg-gray-100 h-64 ">
-        <GenericsTable
-          ModalElement={ModalEditProduction}
-          data={carItems}
-          tables={CarTables}
-        />
-      </section> */}
-
       <Table.Root style={{ height: "400px" }}>
         <Table.Name tables={CarTables} />
         <Table.Data
@@ -39,6 +32,7 @@ const Desenvolvimento = () => {
       </Table.Root>
 
       <ModalCreateProducion modal={modal} setModal={setModal} />
+      <IsSucessComponent isSucess={isSucess} message="produção criada" />
     </BaseSection>
   );
 };

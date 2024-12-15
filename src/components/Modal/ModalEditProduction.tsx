@@ -6,9 +6,9 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useQueryApi } from "../../data/hooks/useQueryApi";
 import { useForm } from "react-hook-form";
-import CarInforUpdates from "../EditProductions/CarInforUpdates";
-import InforProductions from "../EditProductions/InforProductions";
-import ButtonReturn from "../../assets/imgs/LinksIcons/ButtonReturn";
+import CarInforUpdates from "../layouts/development/FormEditProductions/CarInforUpdates";
+import InforProductions from "../layouts/development/FormEditProductions/InforProductions";
+import ButtonClose from "../../assets/imgs/LinksIcons/ButtonClose";
 import { FC } from "react";
 import { CarObject } from "../../data/types/productionTypes";
 import { ActionsApi } from "../../types/useQueryApiTypes";
@@ -56,7 +56,7 @@ const ModalEditProduction: FC<ModalProps> = ({ setModal, value }) => {
       <header className="flex justify-between">
         <h2 className="p-2 text-white font-normal  ">Edite as informações</h2>
         <button onClick={() => setModal({ modal: false, value: null })}>
-          <ButtonReturn />
+          <ButtonClose />
         </button>
       </header>
       <div className="flex mt-4">

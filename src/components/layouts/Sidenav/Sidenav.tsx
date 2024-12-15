@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import { TypeRoutes } from "../../../routes/types";
 import verifyPermissions from "../../../utils/alerts/verifyPermissions";
 import { Link } from "react-router-dom";
@@ -8,6 +8,9 @@ import { rootState } from "../../../data/redux/reducers";
 import Profile from "../../common/Profile/Profile";
 import { NavBar } from "../../common/Navbar";
 import BaseSection from "../../common/BaseSection/BaseSection";
+import { useQueryApi } from "../../../data/hooks/useQueryApi";
+import { ActionsApi } from "../../../types/useQueryApiTypes";
+import { TableContext } from "../../../data/context/Tableprovider";
 
 interface iSidenav {
   routes: TypeRoutes[];
@@ -19,6 +22,7 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission, userLogged }) => {
   const userlogged = useSelector(
     (state: rootState) => state.authentication.user
   );
+
 
   const linkAllowd = () => {
     return routes.map(({ key, path, permission, icon }) => {

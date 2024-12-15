@@ -1,13 +1,15 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactElement } from "react";
 
 interface NavBarButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
+  icon?: ReactElement;
+  text?: string;
+  rest?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
-export function NavBarButton({ text, ...rest }: NavBarButtonProps) {
+export function NavBarButton({ icon, text, ...rest }: NavBarButtonProps) {
   return (
     <button className="bg-white p-2 font-semibold rounded-md text-sm" {...rest}>
-      {text}
+      {icon ? icon : text}
     </button>
   );
 }

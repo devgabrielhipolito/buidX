@@ -2,6 +2,7 @@ import { FC } from "react";
 import {
   Control,
   Controller,
+  DefaultValues,
   FieldErrors,
   UseFormRegister,
 } from "react-hook-form";
@@ -19,6 +20,7 @@ interface modalProps {
   control: Control<createUserSchema>;
   register: UseFormRegister<createUserSchema>;
   error: FieldErrors<createUserSchema>;
+  defafultValues: DefaultValues<createUserObject>;
 }
 
 const UserInforUpdate: FC<modalProps> = ({
@@ -27,6 +29,7 @@ const UserInforUpdate: FC<modalProps> = ({
   error,
   onSubmit,
   register,
+  defafultValues,
 }) => {
   return (
     <Form.Content>
@@ -39,6 +42,8 @@ const UserInforUpdate: FC<modalProps> = ({
               {...register("email")}
               placeholder="Digite o email"
               type="text"
+              
+              defaultValue={defafultValues.email}
             />
           )}
         />

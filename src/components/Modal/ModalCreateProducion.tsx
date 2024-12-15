@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useQueryApi } from "../../data/hooks/useQueryApi";
@@ -7,10 +7,18 @@ import {
   createProduction,
   createProductionSchema,
 } from "../../schemas/createProductionSchema";
-import ErrorMessage from "../Alerts/ErrorMessage";
-import CarForm from "../layouts/development/Form/CarForm";
-import EmployeeForm from "../layouts/development/Form/EmployeeForm";
-import ButtonSubmit from "../layouts/development/Form/ButtonSubmit";
+import CarForm from "../layouts/development/FormCreateProduction/CarForm";
+import EmployeeForm from "../layouts/development/FormCreateProduction/EmployeeForm";
+import { Modal } from "../common/Modal";
+import { NavBar } from "../common/Navbar";
+import ButtonClose from "../../assets/imgs/LinksIcons/ButtonClose";
+import { useDispatch, useSelector } from "react-redux";
+import { rootState } from "../../data/redux/reducers";
+import {
+  productionResetSuccess,
+  productionSuccess,
+} from "../../data/redux/actions";
+import IsSucessComponent from "../Alerts/IsSucessComponent";
 
 interface IModal {
   modal: boolean;
@@ -23,29 +31,35 @@ const ModalCreateProducion: FC<IModal> = ({ modal, setModal }) => {
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
   } = useForm<createProductionSchema>({
     resolver: yupResolver(createProduction),
   });
-  console.log(errors);
   const { dispatchAction } = useQueryApi();
+  const dispacth = useDispatch();
   const onsubmit = handleSubmit((data) => {
     dispatchAction({ data, action: ActionsApi.createProduction });
+    reset();
   });
+  const issucess = useSelector((state: rootState) => state.production.isSucess);
+  if (issucess) {
+    setModal(false);
+    dispacth(productionResetSuccess());
+  }
 
   if (modal)
     return (
-      <section
-        className="absolute bg-gray-500 p-2 rounded-md
-      h-[500px] 
-      w-full
-      flex
-      flex-col
-      top-16
-      "
-      >
-        <p className="text-white text-lg">Crie uma nova produção</p>
-        <div className="flex justify-between">
+      <Modal.Content style={{ width: "600px" }}>
+        <NavBar.Header>
+          <NavBar.Titile text="Criar uma nova produção" />
+          <NavBar.Button
+            style={{ backgroundColor: "transparent" }}
+            icon={<ButtonClose />}
+            onClick={() => setModal(false)}
+          />
+        </NavBar.Header>
+        <div className="flex justify-between mt-2">
           <CarForm
             control={control}
             register={register}
@@ -62,9 +76,8 @@ const ModalCreateProducion: FC<IModal> = ({ modal, setModal }) => {
           />
         </div>
 
-        <ButtonSubmit setModal={setModal} onSubmit={onsubmit} />
-        {/* <ErrorMessage error={errors} /> */}
-      </section>
+        <Modal.Button onSubmit={onsubmit} text="Criar produção" />
+      </Modal.Content>
     );
 };
 

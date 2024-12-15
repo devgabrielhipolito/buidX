@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import EditIcon from "../../../assets/imgs/LinksIcons/EditIcon";
+import { TableContext } from "../../../data/context/TableProvider";
 
 interface TableDataProps {
   item: any[];
@@ -7,10 +8,9 @@ interface TableDataProps {
 }
 
 export function TableData({ item, excludeTables }: TableDataProps) {
+  const { setValue, value } = useContext(TableContext);
   const tables = item.length > 0 ? Object.keys(item[0]) : [];
-  console.log(tables);
   const teste = tables.filter((key) => !excludeTables.includes(key));
-  console.log(item);
   if (item.length >= 1)
     return (
       <tbody className="  ">
@@ -19,7 +19,23 @@ export function TableData({ item, excludeTables }: TableDataProps) {
             {teste.map((colunm, colIndex) => (
               <td className="w-[10%] text-center">{data[colunm]}</td>
             ))}
-            <button className="w-[10%] text-center"><EditIcon/></button>
+            <button
+              className="w-[10%] text-center"
+              onClick={() =>
+                setValue({
+                  value: {
+                    ...data,
+                    filterData: teste.reduce((acc, colunm) => {
+                      acc[colunm] = data[colunm];
+                      return acc;
+                    }, {} as Record<string, any>),
+                  },
+                  modal: true,
+                })
+              }
+            >
+              <EditIcon />
+            </button>
           </tr>
         ))}
       </tbody>

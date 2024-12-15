@@ -20,11 +20,15 @@ const productionReducer = createSlice({
   reducers: {
     PRODUCTION_REQUEST: (
       state,
-      { payload }: PayloadAction<{ data: CarObject[] }>
-    ) => ({
-      ...state,
-      car: payload.data,
-    }),
+      { payload }: PayloadAction<{ data: CarObject[]; status: string }>
+    ) => {
+      const { status, data } = payload;
+      if (data) {
+        state.car = data;
+        state.message = status;
+      }
+      state.message = status;
+    },
     PRODUCTION_UPDATE: (
       state,
       { payload }: PayloadAction<{ data: CarObject[] }>
@@ -32,9 +36,13 @@ const productionReducer = createSlice({
       ...state,
       car: payload.data,
     }),
-    PRODUCTION_SUCESS: (state: ProductionType) => ({
+    PRODUCTION_SUCCESS: (state: ProductionType) => ({
       ...state,
       isSucess: true,
+    }),
+    PRODUCTION_RESET_SUCCESS: (state: ProductionType) => ({
+      ...state,
+      isSucess: false,
     }),
     PRODUCTION_DELETE: (
       state,
@@ -48,8 +56,9 @@ const productionReducer = createSlice({
 
 export const {
   PRODUCTION_REQUEST,
+  PRODUCTION_RESET_SUCCESS,
   PRODUCTION_UPDATE,
-  PRODUCTION_SUCESS,
+  PRODUCTION_SUCCESS,
   PRODUCTION_DELETE,
 } = productionReducer.actions;
 

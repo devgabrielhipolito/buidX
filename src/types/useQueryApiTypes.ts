@@ -7,10 +7,11 @@ export enum ActionsApi {
   productionDelete = "productionDelete",
   createUser = "createUser",
   deleteUser = "deleteUser",
+  requestUser = "requestUser",
 }
 
 export type dispatchTypes = {
-  data: any;
+  data?: any;
   action: ActionsApi;
 };
 

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CarObject } from "../../types/productionTypes";
 import { createUserObject } from "../../types/createUserTypes";
+import { rootState } from ".";
 
 interface CreateUserType {
   users: createUserObject[];
@@ -35,6 +36,14 @@ const createEmployeeReducer = createSlice({
       }
       state.message = message;
     },
+    CREATE_EMPLOYEE_REQUEST: (
+      state,
+      { payload }: PayloadAction<{ allUsers: createUserObject[] }>
+    ) => {
+      const { allUsers } = payload;
+      state.users = allUsers;
+    },
+
     CREATE_EMPLOYEE_UPDATE: () => {},
     CREATE_USER_SUCESS: (state) => ({
       ...state,
@@ -76,6 +85,7 @@ export const {
   CREATE_EMPLOYEE_RESET_SUCESS,
   CREATE_USER_SUCESS,
   CREATE_EMPLOYEE_UPDATE,
+  CREATE_EMPLOYEE_REQUEST,
 } = createEmployeeReducer.actions;
 
 export default createEmployeeReducer.reducer;

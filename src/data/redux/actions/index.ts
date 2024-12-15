@@ -25,11 +25,14 @@ export const productionRequest = createAction<CarObject>(
 export const productionUpdate = createAction<CarObject>(
   productionActions.PRODUCTION_UPDATE
 );
-export const productionSucess = createAction<boolean>(
+export const productionSuccess = createAction<boolean>(
   productionActions.PRODUCTION_SUCCESS
 );
 export const productionDelete = createAction(
   productionActions.PRODUCTION_DELETE
+);
+export const productionResetSuccess = createAction(
+  productionActions.PRODUCTION_RESET_SUCCESS
 );
 
 //CREATE_USER
@@ -48,4 +51,7 @@ export const createEmployeeSucess = createAction(
 );
 export const createEmployeeResetSucess = createAction(
   createUserActions.CREATE_EMPLOYEE_RESET_SUCESS
+);
+export const createEmployeeRequest = createAction(
+  createUserActions.CREATE_EXMPLOYEE_REQUEST
 );

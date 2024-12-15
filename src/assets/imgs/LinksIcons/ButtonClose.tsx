@@ -1,6 +1,6 @@
 import React from "react";
 
-const ButtonReturn = () => {
+const ButtonClose = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,4 +14,4 @@ const ButtonReturn = () => {
   );
 };
 
-export default ButtonReturn;
+export default ButtonClose;
