@@ -8,7 +8,11 @@ import ButtonSubmit from "../layouts/Users/ButtonSubmit";
 import { useQueryApi } from "../../data/hooks/useQueryApi";
 import { ActionsApi } from "../../types/useQueryApiTypes";
 import { useDispatch, useSelector } from "react-redux";
-import { createEmployee, createEmployeeUpdate } from "../../data/redux/actions";
+import {
+  createEmployee,
+  createEmployeeResetSucess,
+  createEmployeeUpdate,
+} from "../../data/redux/actions";
 import { rootState } from "../../data/redux/reducers";
 import ErrorMessage from "../Alerts/ErrorMessage";
 import { NavBar } from "../common/Navbar";
@@ -30,8 +34,8 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
   } = useForm<createUserSchema>({
     resolver: yupResolver(createUser),
   });
-  const [email, setEmail] = useState<string>();
-
+  // const [email, setEmail] = useState<string>();
+  const dispatch = useDispatch();
   const { dispatchAction } = useQueryApi();
   const onSubmit = handleSubmit((data) => {
     dispatchAction({ data, action: ActionsApi.createUser });
@@ -42,9 +46,9 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
   const { isSucess, message } = useSelector(
     (state: rootState) => state.createEmployee
   );
-  console.log(errors);
   if (isSucess) {
     setModal(false);
+    dispatch(createEmployeeResetSucess());
   }
 
   if (modal)
@@ -55,6 +59,7 @@ const ModalManagerUser: FC<modalProps> = ({ setModal, modal }) => {
           <NavBar.Button onClick={() => setModal(false)} text="fechar" />
         </NavBar.Header>
         <hr className="text-gray mb-2" />
+
         <FormUser
           control={control}
           error={errors}

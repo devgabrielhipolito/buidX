@@ -1,7 +1,5 @@
 import React, { memo } from "react";
-import { months } from "../utils/calender/CalenderDays";
-import currentDate from "../utils/calender/currentDate";
-import { dados } from "../mocks/Dashboard/data";
+
 import Calender from "../components/layouts/Dashboard/Calender/Calender";
 import Grafico from "../components/layouts/Dashboard/Grafico/productionBar";
 import { useSelector } from "react-redux";

@@ -12,7 +12,7 @@ import { rootState } from "../../data/redux/reducers";
 import { TableContext } from "../../data/context/TableProvider";
 
 const ModalEditUser = () => {
-  const { value, setValue } = useContext(TableContext);
+  const { data, setData } = useContext(TableContext);
   const {
     control,
     register,
@@ -21,13 +21,12 @@ const ModalEditUser = () => {
   } = useForm<createUserSchema>({
     resolver: yupResolver(createUser),
     defaultValues: {
-      email: value.email,
-      name: value.name,
-      permission: value.permission,
+      email: data.value?.email,
+      name: data.value?.name,
+      permission: data.value?.permission,
     },
   });
   const { dispatchAction } = useQueryApi();
-
   const isSucess = useSelector(
     (state: rootState) => state.createEmployee.isSucess
   );
@@ -37,7 +36,7 @@ const ModalEditUser = () => {
   });
 
   const handleDelete = () => {
-    const data = value?._id;
+    console.log(data);
     dispatchAction({ data, action: ActionsApi.deleteUser });
   };
 
@@ -45,7 +44,7 @@ const ModalEditUser = () => {
     <div className="absolute inset-0 w-[400px] h-[350px] bg-black m-auto rounded-md top-20">
       <header className="flex justify-between">
         <h2 className="p-2 text-white font-normal  ">Edite as informações</h2>
-        <button onClick={() => setValue({ modal: false, value: null })}>
+        <button onClick={() => setData({ modal: false, value: null })}>
           <ButtonClose />
         </button>
       </header>
@@ -55,12 +54,7 @@ const ModalEditUser = () => {
         error={errors}
         onSubmit={onSubmit}
         register={register}
-        userItem={value}
-        defafultValues={{
-          email: value.email,
-          name: value.name,
-          permission: value.permission | "",
-        }} 
+        userItem={data}
       />
 
       <div className=" mt-3 text-center font-semibold text-gray">

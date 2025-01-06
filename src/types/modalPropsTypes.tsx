@@ -1,6 +1,6 @@
 export interface ModalProps {
-  value: any | null;
-  setValue: React.Dispatch<{
+  data: any | null;
+  setData: React.Dispatch<{
     modal: boolean;
     value: null;
   }>;

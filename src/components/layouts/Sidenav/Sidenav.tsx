@@ -23,7 +23,6 @@ const Sidenav: FC<iSidenav> = ({ routes, userPermission, userLogged }) => {
     (state: rootState) => state.authentication.user
   );
 
-
   const linkAllowd = () => {
     return routes.map(({ key, path, permission, icon }) => {
       if (verifyPermissions(permission, userPermission)) {

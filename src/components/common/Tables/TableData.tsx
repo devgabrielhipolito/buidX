@@ -8,7 +8,7 @@ interface TableDataProps {
 }
 
 export function TableData({ item, excludeTables }: TableDataProps) {
-  const { setValue, value } = useContext(TableContext);
+  const { setData, data } = useContext(TableContext);
   const tables = item.length > 0 ? Object.keys(item[0]) : [];
   const teste = tables.filter((key) => !excludeTables.includes(key));
   if (item.length >= 1)
@@ -22,13 +22,9 @@ export function TableData({ item, excludeTables }: TableDataProps) {
             <button
               className="w-[10%] text-center"
               onClick={() =>
-                setValue({
+                setData({
                   value: {
                     ...data,
-                    filterData: teste.reduce((acc, colunm) => {
-                      acc[colunm] = data[colunm];
-                      return acc;
-                    }, {} as Record<string, any>),
                   },
                   modal: true,
                 })

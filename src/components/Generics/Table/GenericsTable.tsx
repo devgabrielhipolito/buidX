@@ -50,7 +50,7 @@ const GenericsTable: FC<TableProps> = ({ data, tables, ModalElement }) => {
       </table>
 
       {isModalOpen.modal && (
-        <ModalElement value={isModalOpen.value} setModal={setIsModalOpen} />
+        <ModalElement data={isModalOpen.value} setData={setIsModalOpen} />
       )}
     </section>
   );

@@ -12,9 +12,11 @@ import { Table } from "../components/common/Tables";
 
 const Users = () => {
   const [modal, setModal] = useState(false);
-  const { users: listUsers, message } = useSelector(
-    (state: rootState) => state.createEmployee
-  );
+  const {
+    users: listUsers,
+    message,
+    isSucess,
+  } = useSelector((state: rootState) => state.createEmployee);
   return (
     <section className="relative">
       <NavBar.Header>
@@ -32,7 +34,10 @@ const Users = () => {
       </Table.Root>
 
       <ModalManagerUser modal={modal} setModal={setModal} />
-      {/* <IsSucessComponent message={message} /> */}
+      <IsSucessComponent
+        message={"Usuario criado com sucesso"}
+        isSucess={isSucess}
+      />
     </section>
   );
 };

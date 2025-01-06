@@ -4,6 +4,7 @@ import {
   Controller,
   DefaultValues,
   FieldErrors,
+  useForm,
   UseFormRegister,
 } from "react-hook-form";
 import { createUserObject } from "../../../data/types/createUserTypes";
@@ -20,7 +21,6 @@ interface modalProps {
   control: Control<createUserSchema>;
   register: UseFormRegister<createUserSchema>;
   error: FieldErrors<createUserSchema>;
-  defafultValues: DefaultValues<createUserObject>;
 }
 
 const UserInforUpdate: FC<modalProps> = ({
@@ -29,8 +29,13 @@ const UserInforUpdate: FC<modalProps> = ({
   error,
   onSubmit,
   register,
-  defafultValues,
 }) => {
+  const {} = useForm<createUserSchema>({
+    defaultValues: {
+      email: userItem?.email,
+    },
+  });
+
   return (
     <Form.Content>
       <Form.Label text="Email">
@@ -42,8 +47,6 @@ const UserInforUpdate: FC<modalProps> = ({
               {...register("email")}
               placeholder="Digite o email"
               type="text"
-              
-              defaultValue={defafultValues.email}
             />
           )}
         />
@@ -54,7 +57,7 @@ const UserInforUpdate: FC<modalProps> = ({
           name="name"
           control={control}
           render={() => (
-            <input
+            <Form.Input
               {...register("name")}
               placeholder="Digite o nome"
               type="text"

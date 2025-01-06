@@ -5,7 +5,6 @@ interface TableModalProps {
   ModalElement: FC;
 }
 export function TableModal({ ModalElement }: TableModalProps) {
-  const { value, setValue } = useContext(TableContext);
-  console.log(value.modal);
-  return <>{value.modal && <ModalElement />}</>;
+  const { data, setData } = useContext(TableContext);
+  return <>{data.modal && <ModalElement />}</>;
 }
