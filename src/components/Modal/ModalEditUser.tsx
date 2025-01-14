@@ -36,8 +36,8 @@ const ModalEditUser = () => {
   });
 
   const handleDelete = () => {
-    console.log(data);
-    dispatchAction({ data, action: ActionsApi.deleteUser });
+    console.log(data.value._id);
+    dispatchAction({ data: data.value._id, action: ActionsApi.deleteUser });
   };
 
   return (
