@@ -2,7 +2,7 @@
 
 <br>
 
-<img src="./public/capaBuildx.png" alt="capa do projeto">
+<img src="./public/capaBuildx.png" width="250px" alt="capa do projeto">
 
 <br>
 
@@ -20,6 +20,6 @@ Para a interface, optei por Tailwind CSS, combinado com componentes reutilizáve
   - React Router
   - Content Api
   - Composition
-  
+
 - Tailwind
 - Node Js
