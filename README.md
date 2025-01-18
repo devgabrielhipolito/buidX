@@ -8,5 +8,17 @@
 
 # Descrição
 
-Estou criando um sistema para monitorar a produtividade na criação de carros, usando React com TypeScript e Redux Toolkit para gerenciar o estado de maneira eficiente. A ideia é construir uma aplicação que seja escalável e fácil de manter.
-Para deixar a interface mais limpa e personalizável, estou utilizando Tailwind CSS junto com componentes reutilizáveis, o que facilita a manutenção e a expansão do projeto. Também usei a Context API para gerenciar estados locais de forma simples e integrada com os componentes.
+Estou desenvolvendo um sistema para monitorar a produtividade na criação de carros, utilizando React com TypeScript e Redux Toolkit para gerenciar o estado de forma eficiente. A aplicação é projetada para ser escalável e fácil de manter. No backend, estou utilizando Node.js para fornecer uma base robusta e flexível.
+
+Para a interface, optei por Tailwind CSS, combinado com componentes reutilizáveis, garantindo um design limpo, personalizável e que facilite a manutenção e expansão do projeto. Além disso, integrei a Context API para gerenciar estados locais de maneira simples e eficiente dentro dos componentes
+
+# Tecnologias utilizadas
+
+- React.js + TypeScript
+  - Redux Toolkit
+  - Rtk Query
+  - React Router
+  - Content Api
+  - Composition
+  
+- Tailwind
