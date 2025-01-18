@@ -14,7 +14,7 @@ Para a interface, optei por Tailwind CSS, combinado com componentes reutilizáve
 
 # Tecnologias utilizadas
 
-- React.js + TypeScript
+- React Js + TypeScript
   - Redux Toolkit
   - Rtk Query
   - React Router
@@ -22,3 +22,4 @@ Para a interface, optei por Tailwind CSS, combinado com componentes reutilizáve
   - Composition
   
 - Tailwind
+- Node Js
