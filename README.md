@@ -2,7 +2,7 @@
 
 <br>
 
-<img src="./public/capaBuildx.png" style="text-align:center" width="750px" alt="capa do projeto">
+<img src="./public/capaBuildx.png" style="margin:0 auto" width="750px" alt="capa do projeto">
 
 <br>
 
