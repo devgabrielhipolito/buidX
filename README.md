@@ -41,3 +41,4 @@ Para a interface, optei por Tailwind CSS, combinado com componentes reutilizáve
 
 - Tailwind
 - Node Js
+- MongoDb
