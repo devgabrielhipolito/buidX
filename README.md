@@ -8,7 +8,7 @@
 
 # Tarefas e bus pra resolver
 
-- **(tarefa)** Criar condição para quantiedade de produção do ano atual (sem a condição ela pega de todos os anos )
+- **(tarefa)** Criar condição para quantidade de produção do ano atual (sem a condição ela pega de todos os anos )
 - **(tarefa)** Mensagem de sucesso após a ação:
 
   - Criar usuarios ✅
