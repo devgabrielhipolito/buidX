@@ -2,9 +2,26 @@
 
 <br>
 
-<img src="./public/capaBuildx.png" style="margin:0 auto" width="750px" alt="capa do projeto">
+<img src="./public/capaBuildx.png" style="margin:0 auto" width="550px" alt="capa do projeto">
 
 <br>
+
+# Tarefas e bus pra resolver
+
+- **(tarefa)** Criar condição para quantiedade de produção do ano atual (sem a condição ela pega de todos os anos )
+- **(tarefa)** Mensagem de sucesso após a ação:
+
+  - Criar usuarios ✅
+  - Deletar usuarios 🟡
+  - Criar produção ❌
+  - Excluir produção ❌
+
+- **(Tarefa)** Mostrar as produções que estao em produção/conluida na data selecionada
+
+- **(Bug)** Não esta mostrando mensagens de erro no login
+  - Este email não existe
+  - Senha incorreta
+    <br>
 
 # Descrição
 
@@ -15,6 +32,7 @@ Para a interface, optei por Tailwind CSS, combinado com componentes reutilizáve
 # Tecnologias utilizadas
 
 - React Js + TypeScript
+
   - Redux Toolkit
   - Rtk Query
   - React Router

@@ -7,6 +7,7 @@ import {
 import { authSchema, AuthSchema } from "../schemas/auth";
 import { useQueryApi } from "../data/hooks/useQueryApi";
 import { ActionsApi } from "../types/useQueryApiTypes";
+
 const Login = () => {
   const {
     control,

@@ -9,15 +9,18 @@ import { useForm } from "react-hook-form";
 import CarInforUpdates from "../layouts/development/FormEditProductions/CarInforUpdates";
 import InforProductions from "../layouts/development/FormEditProductions/InforProductions";
 import ButtonClose from "../../assets/imgs/LinksIcons/ButtonClose";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { CarObject } from "../../data/types/productionTypes";
 import { ActionsApi } from "../../types/useQueryApiTypes";
 import { ModalProps } from "../../types/modalPropsTypes";
 import ErrorMessage from "../Alerts/ErrorMessage";
 import { useSelector } from "react-redux";
 import { rootState } from "../../data/redux/reducers";
+import { TableContext } from "../../data/context/TableProvider";
 
-const ModalEditProduction: FC<ModalProps> = ({ setModal, value }) => {
+const ModalEditProduction = () => {
+  const { data, setData } = useContext(TableContext);
+
   const {
     control,
     register,
@@ -27,41 +30,41 @@ const ModalEditProduction: FC<ModalProps> = ({ setModal, value }) => {
   } = useForm<EditProductinSchema>({
     resolver: yupResolver(createProduction.pick(["marca", "modelo"])),
     defaultValues: {
-      marca: value?.marca,
-      modelo: value?.modelo,
+      marca: data.value?.marca,
+      modelo: data.value?.modelo,
     },
   });
   const { dispatchAction } = useQueryApi();
+
   const onsubmit = handleSubmit((updaDate) => {
-    const _id = value?._id;
-    const data = {
+    const _id = data.value?._id;
+    const dataObject = {
       ...updaDate,
       _id,
     };
-    dispatchAction({ action: ActionsApi.productionUpdate, data });
+    dispatchAction({ action: ActionsApi.productionUpdate, data: dataObject });
   });
 
   const message = useSelector(
     (state: rootState) => state.createEmployee.message
   );
 
-  console.log(message);
   const handleDelete = () => {
-    const data = value?._id;
-    dispatchAction({ action: ActionsApi.productionDelete, data });
+    const item = data.value?._id;
+    dispatchAction({ action: ActionsApi.productionDelete, data: item });
   };
 
   return (
     <section className="absolute inset-0 w-[560px] h-[400px] bg-black m-auto rounded-md ">
       <header className="flex justify-between">
         <h2 className="p-2 text-white font-normal  ">Edite as informações</h2>
-        <button onClick={() => setModal({ modal: false, value: null })}>
+        <button onClick={() => setData({ modal: false, value: null })}>
           <ButtonClose />
         </button>
       </header>
       <div className="flex mt-4">
         <CarInforUpdates
-          carItem={value}
+          data={data.value}
           control={control}
           error={errors}
           onSubmit={onsubmit}

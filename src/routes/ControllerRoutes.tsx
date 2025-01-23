@@ -13,6 +13,7 @@ export const ControllerRoutes = () => {
   const { user, userPermission } = useSelector(
     (state: rootState) => state.authentication
   );
+
   const routes = useMemo(() => {
     if (!isAuthenticated) {
       return publicRoutes;
@@ -31,6 +32,8 @@ export const ControllerRoutes = () => {
 
     return mappedRoutes.flat() as ReactElement[];
   }, [isAuthenticated]);
+  
+  console.log(isAuthenticated);
 
   return (
     <section

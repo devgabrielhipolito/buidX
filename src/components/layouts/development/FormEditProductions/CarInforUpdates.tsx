@@ -9,7 +9,7 @@ import { EditProductinSchema } from "../../../../schemas/createProductionSchema"
 import { CarObject } from "../../../../data/types/productionTypes";
 
 interface modalProps {
-  carItem: Pick<
+  data: Pick<
     CarObject,
     "_id" | "marca" | "modelo" | "status" | "funcionario" | "supervisor"
   > | null;
@@ -20,7 +20,7 @@ interface modalProps {
 }
 
 const CarInforUpdates: FC<modalProps> = ({
-  carItem,
+  data,
   control,
   error,
   onSubmit,
@@ -62,37 +62,37 @@ const CarInforUpdates: FC<modalProps> = ({
             />
           )}
         />
-        <label
-          className="flex flex-col text-[14px]  p-1 text-gray font-semibold"
-          htmlFor=""
-        >
-          Status
-          <Controller
-            name="status"
-            control={control}
-            render={() => (
-              <select
-                {...register("status")}
-                className="[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[35px] rounded-md text-black"
-              >
-                <option selected value={carItem?.status}>
-                  {carItem?.status}
-                </option>
-                <option
-                  value={
-                    !carItem?.status.includes("Concluido")
-                      ? "Concluido"
-                      : "Em produção"
-                  }
-                >
-                  {!carItem?.status.includes("Concluido")
+      </label>
+      <label
+        className="flex flex-col text-[14px]  p-1 text-gray font-semibold"
+        htmlFor=""
+      >
+        Status
+        <Controller
+          name="status"
+          control={control}
+          render={() => (
+            <select
+              {...register("status")}
+              className="[220px] mt-1 bg-gray placeholder:font-normal text-sm  h-[35px] rounded-md text-black"
+            >
+              <option selected value={data?.status}>
+                {data?.status}
+              </option>
+              <option
+                value={
+                  !data?.status.includes("Concluido")
                     ? "Concluido"
-                    : "Em produção"}
-                </option>
-              </select>
-            )}
-          />
-        </label>
+                    : "Em produção"
+                }
+              >
+                {!data?.status.includes("Concluido")
+                  ? "Concluido"
+                  : "Em produção"}
+              </option>
+            </select>
+          )}
+        />
       </label>
     </div>
   );

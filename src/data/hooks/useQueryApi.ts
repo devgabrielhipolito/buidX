@@ -16,7 +16,6 @@ import {
   createEmployee,
   createEmployeeRequest,
   createEmployeeSucess,
-  createEmployeeUpdate,
   productionDelete,
   productionRequest,
   productionSuccess,
@@ -45,6 +44,7 @@ export const useQueryApi = () => {
   const [deleteUserApi, { isLoading: isDeletedUser }] =
     useDeleteUserApiMutation();
   const [requestUser] = useRequestUserMutation();
+
   const mappedFetch: MappedFetchTypes = {
     requestUser: {
       api: requestUser,
@@ -85,7 +85,6 @@ export const useQueryApi = () => {
     if (!mappedFetch[action]) {
       return console.log(`A ação ${action} não é valida`);
     }
-
     query({ action, data });
   };
 
@@ -98,11 +97,11 @@ export const useQueryApi = () => {
         }
         setMessage(null);
         dispatch(mappedFetch[action].reducer(data));
-        if (mappedFetch[action].reducerSucess && data.status === "concluido") {
+        if (mappedFetch[action].reducerSucess) {
           dispatch(mappedFetch[action].reducerSucess(true));
         }
       })
-      .catch((err) => console.log("err"));
+      .catch((err) => console.log(err));
   };
   return { dispatchAction, isLoading: isAuthLoading };
 };

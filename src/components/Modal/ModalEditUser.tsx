@@ -32,13 +32,17 @@ const ModalEditUser = () => {
   );
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    console.log("22");
   });
 
   const handleDelete = () => {
     console.log(data.value._id);
     dispatchAction({ data: data.value._id, action: ActionsApi.deleteUser });
   };
+
+  if (isSucess) {
+    setData({ modal: false, value: null });
+  }
 
   return (
     <div className="absolute inset-0 w-[400px] h-[350px] bg-black m-auto rounded-md top-20">
@@ -60,7 +64,7 @@ const ModalEditUser = () => {
       <div className=" mt-3 text-center font-semibold text-gray">
         <button
           className="p-2 bg-[#2EA451] w-[100px] rounded-md text-sm "
-          onClick={onSubmit}
+          onClick={() => onSubmit}
         >
           Atualizar
         </button>
