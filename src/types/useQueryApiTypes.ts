@@ -12,7 +12,7 @@ export enum ActionsApi {
 
 export type dispatchTypes = {
   data?: any;
-  action: ActionsApi;
+  action: any;
 };
 
 export type returnType = ReturnType<ActionCreatorWithPayload<any, any>>;
@@ -22,5 +22,6 @@ export type MappedFetchTypes<Tpayload = any, Tresponse = any> = {
     readonly api: (payload: Tpayload) => Promise<Tresponse>;
     readonly reducer: (payload: Tpayload) => returnType;
     reducerSucess?: (payload: Tpayload) => returnType;
+    reducerFailed?: (payload: Tpayload) => returnType;
   };
 };

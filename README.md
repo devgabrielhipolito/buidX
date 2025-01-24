@@ -9,6 +9,7 @@
 # Tarefas e bus pra resolver
 
 - **(tarefa)** Criar condição para quantidade de produção do ano atual (sem a condição ela pega de todos os anos )
+- **(tarefa)** Seperar O useQueryApi da autenticação
 - **(tarefa)** Mensagem de sucesso após a ação:
 
   - Criar usuarios ✅
@@ -19,7 +20,7 @@
 - **(Tarefa)** Mostrar as produções que estao em produção/conluida na data selecionada
 
 - **(Bug)** Não esta mostrando mensagens de erro no login
-  - Este email não existe
+  - Este email não existe 
   - Senha incorreta
     <br>
 

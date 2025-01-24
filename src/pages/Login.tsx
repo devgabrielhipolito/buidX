@@ -1,12 +1,12 @@
 import { memo } from "react";
 import ComponentLogin from "../components/layouts/Login/ComponentLogin";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  useForm,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { authSchema, AuthSchema } from "../schemas/auth";
 import { useQueryApi } from "../data/hooks/useQueryApi";
 import { ActionsApi } from "../types/useQueryApiTypes";
+import { useSelector } from "react-redux";
+import { rootState } from "../data/redux/reducers";
 
 const Login = () => {
   const {
@@ -18,7 +18,9 @@ const Login = () => {
     resolver: yupResolver(authSchema),
   });
   const { dispatchAction, isLoading } = useQueryApi();
-  
+  const message = useSelector(
+    (state: rootState) => state.authentication.message
+  );
   const onSubmit = handleSubmit((data) => {
     dispatchAction({ data, action: ActionsApi.authentication });
   });
@@ -41,6 +43,8 @@ const Login = () => {
       <a className="mt-5" href="">
         Esqueceu a senha?
       </a>
+      
+      <p className="mt-2 bg-red-600 text-slate-200 p-2 rounded-lg ">{message}</p>
     </section>
   );
 };

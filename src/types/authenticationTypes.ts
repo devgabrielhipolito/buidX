@@ -11,6 +11,7 @@ type User = {
 export type AuthType = {
   token: string | null;
   isAuthenticated: boolean;
-  userPermission: string;
+  userPermission: string | null;
   user: User | null;
+  message: string;
 };

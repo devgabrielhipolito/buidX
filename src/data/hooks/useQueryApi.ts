@@ -11,6 +11,7 @@ import {
   useRequestUserMutation,
 } from "../redux/RtkQuery";
 import {
+  authenticationFailed,
   authenticationRequest,
   authenticationSuccess,
   createEmployee,
@@ -45,63 +46,83 @@ export const useQueryApi = () => {
     useDeleteUserApiMutation();
   const [requestUser] = useRequestUserMutation();
 
-  const mappedFetch: MappedFetchTypes = {
-    requestUser: {
-      api: requestUser,
-      reducer: createEmployeeRequest,
-    },
-    authentication: {
-      api: authenticationUser,
-      reducer: authenticationRequest,
-      reducerSucess: authenticationSuccess,
-    },
-    createProduction: {
-      api: productionCreate,
-      reducer: productionRequest,
-      reducerSucess: productionSuccess,
-    },
-    productionUpdate: {
-      api: productionUpdateApi,
-      reducer: productionUpdate,
-    },
+  const authentication = (data: { status: String }): any => {
+    const apiTarget = authenticationUser(data);
 
-    productionDelete: {
-      api: productionDeleteApi,
-      reducer: productionDelete,
-    },
-    createUser: {
-      api: createUserApi,
-      reducer: createEmployee,
-      reducerSucess: createEmployeeSucess,
-    },
-    deleteUser: {
-      api: deleteUserApi,
-      reducer: CREATE_EMPLOYEE_DELETE,
-      reducerSucess: createEmployeeSucess,
-    },
+    apiTarget.then(({ data, error }) => {
+      if (data.status === "autenticado") {
+        dispatch(authenticationSuccess());
+        return;
+      }
+      console.log(error);
+    });
+  };
+
+  const createUser = (data: any) => {
+    const apiTarget = createUserApi(data);
+    apiTarget.then(({ data, error }) => {
+      if (data) {
+        createEmployee(data);
+        createEmployeeSucess();
+      }
+
+      console.log(data);
+    });
+  };
+
+  const mappedFetch: any = {
+    // requestUser: {
+    //   api: requestUser,
+    //   reducer: createEmployeeRequest,
+    // },
+
+    authentication: authentication,
+
+    createUser: createUser,
+    // productionUpdate: {
+    //   api: productionUpdateApi,
+    //   reducer: productionUpdate,
+    // },
+
+    // productionDelete: {
+    //   api: productionDeleteApi,
+    //   reducer: productionDelete,
+    // },
+    // createUser: {
+    //   api: createUserApi,
+    //   reducer: createEmployee,
+    //   reducerSucess: createEmployeeSucess,
+    // },
+    // deleteUser: {
+    //   api: deleteUserApi,
+    //   reducer: CREATE_EMPLOYEE_DELETE,
+    //   reducerSucess: createEmployeeSucess,
+    // },
   };
 
   const dispatchAction = ({ action, data }: dispatchTypes) => {
-    if (!mappedFetch[action]) {
-      return console.log(`A ação ${action} não é valida`);
-    }
-    query({ action, data });
+    mappedFetch[action](data);
+    console.log(action);
   };
 
-  const query = ({ action, data }: dispatchTypes) => {
-    const api = mappedFetch[action].api(data);
-    api
-      .then(({ data, error }) => {
-        if (error) {
-          return setMessage(error);
-        }
-        setMessage(null);
-        dispatch(mappedFetch[action].reducer(data));
-        if (mappedFetch[action].reducerSucess) {
-          dispatch(mappedFetch[action].reducerSucess(true));
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+  // const query = ({ action, data }: dispatchTypes) => {
+  //   const api = mappedFetch[action].api(data);
+
+  //   api.then(({ data, error }) => {
+  //     if (error && mappedFetch[action].reducerFailed) {
+  //       const message = error.data?.error;
+  //       console.log(message);
+  //       dispatch(mappedFetch[action].reducerFailed({ message }));
+  //       return setMessage(error);
+  //     }
+  //     setMessage(null);
+
+  //     dispatch(mappedFetch[action].reducer(data));
+  //     if (mappedFetch[action].reducerSucess) {
+  //       dispatch(mappedFetch[action].reducerSucess(true));
+  //     }
+  //   });
+  // };
+
   return { dispatchAction, isLoading: isAuthLoading };
 };

@@ -18,6 +18,10 @@ export const authenticationLogout = createAction(
   authenticationActions.AUTHENTICATION_LOGOUT
 );
 
+export const authenticationFailed = createAction(
+  authenticationActions.AUTHENTICATION_FAILED
+);
+
 //PRODUCTION
 export const productionRequest = createAction<CarObject>(
   productionActions.PRODUCTION_REQUEST
@@ -52,6 +56,7 @@ export const createEmployeeSucess = createAction(
 export const createEmployeeResetSucess = createAction(
   createUserActions.CREATE_EMPLOYEE_RESET_SUCESS
 );
+
 export const createEmployeeRequest = createAction(
   createUserActions.CREATE_EXMPLOYEE_REQUEST
 );

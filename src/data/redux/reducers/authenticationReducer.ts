@@ -4,8 +4,9 @@ import { AuthType, ObjectUser } from "../../../types/authenticationTypes";
 const initialState: AuthType = {
   isAuthenticated: false,
   token: null,
-  userPermission: "employee_master",
+  userPermission: null,
   user: null,
+  message: "",
 };
 
 type responseAuth = {
@@ -13,6 +14,7 @@ type responseAuth = {
   email: string;
   name: string;
   permission: string;
+  message: string;
 };
 
 const authenticationReducer = createSlice({
@@ -39,6 +41,14 @@ const authenticationReducer = createSlice({
       ...state,
       isAuthenticated: false,
       user: null,
+    }),
+
+    AUTHENTICATION_FAILED: (
+      state: AuthType,
+      { payload: { message } }: PayloadAction<responseAuth>
+    ) => ({
+      ...state,
+      message: message,
     }),
   },
 });
