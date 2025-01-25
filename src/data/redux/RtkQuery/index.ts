@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ObjectUser } from "../../../types/authenticationTypes";
 import { CarObject } from "../../types/productionTypes";
 import { createUserObject } from "../../types/createUserTypes";
+import { reqAuth, resAuth } from "../../types/apiTypes";
 
 const queryApi = createApi({
   reducerPath: "queryApi",
@@ -11,7 +12,7 @@ const queryApi = createApi({
   }),
   endpoints: (builder) => {
     return {
-      authenticationUser: builder.mutation({
+      authenticationUser: builder.mutation<resAuth, reqAuth>({
         query: (data) => ({
           url: "/auth",
           body: data,

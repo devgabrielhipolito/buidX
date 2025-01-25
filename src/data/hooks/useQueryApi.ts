@@ -23,6 +23,8 @@ import {
   productionUpdate,
 } from "../redux/actions";
 import { CREATE_EMPLOYEE_DELETE } from "../redux/reducers/createEmployeeReducer";
+import { reqAuth } from "../types/apiTypes";
+import { ObjectUser } from "../../types/authenticationTypes";
 
 export const useQueryApi = () => {
   const [message, setMessage] = useState(null);
@@ -46,16 +48,48 @@ export const useQueryApi = () => {
     useDeleteUserApiMutation();
   const [requestUser] = useRequestUserMutation();
 
-  const authentication = (data: { status: String }): any => {
-    const apiTarget = authenticationUser(data);
+  interface ApiResponse<T> {
+    data?: T;
+    error?: string;
+  }
 
-    apiTarget.then(({ data, error }) => {
-      if (data.status === "autenticado") {
-        dispatch(authenticationSuccess());
-        return;
+  const handleApi = <T>(
+    apiCall: Promise<ApiResponse<T>>,
+    onSucess: (data: T) => void,
+    onError: (error: ApiResponse<T>["error"]) => void
+  ) => {
+    apiCall.then(({ data, error }) => {
+      if (data) {
+        onSucess(data);
+      } else if (error) {
+        onError(error);
       }
-      console.log(error);
+
+      console.log("Error desconhecido");
     });
+  };
+
+  const authentication = (data: reqAuth) => {
+    handleApi(
+      authenticationUser(data),
+      (responseData) => {
+        if (responseData.status === "autenticado") {
+          dispatch(authenticationRequest(data));
+          dispatch(authenticationSuccess());
+        }
+      },
+      (error) => {
+        console.log("Authentication error", error);
+      }
+    );
+
+    // apiTarget.then(({ data, error }) => {
+    //   if (data && data.status === "autenticado") {
+    //     dispatch(authenticationRequest(data));
+    //     dispatch(authenticationSuccess());
+    //   }
+    //   console.log(error);
+    // });
   };
 
   const createUser = (data: any) => {
@@ -71,14 +105,15 @@ export const useQueryApi = () => {
   };
 
   const mappedFetch: any = {
+    //tipar este objeto
+    authentication: authentication,
+    createUser: createUser,
+
     // requestUser: {
     //   api: requestUser,
     //   reducer: createEmployeeRequest,
     // },
 
-    authentication: authentication,
-
-    createUser: createUser,
     // productionUpdate: {
     //   api: productionUpdateApi,
     //   reducer: productionUpdate,
@@ -88,11 +123,7 @@ export const useQueryApi = () => {
     //   api: productionDeleteApi,
     //   reducer: productionDelete,
     // },
-    // createUser: {
-    //   api: createUserApi,
-    //   reducer: createEmployee,
-    //   reducerSucess: createEmployeeSucess,
-    // },
+
     // deleteUser: {
     //   api: deleteUserApi,
     //   reducer: CREATE_EMPLOYEE_DELETE,

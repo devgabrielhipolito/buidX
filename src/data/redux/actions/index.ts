@@ -5,9 +5,10 @@ import productionActions from "./productionActions";
 import { CarObject } from "../../types/productionTypes";
 import createUserActions from "./createUserActions";
 import { createUserObject } from "../../types/createUserTypes";
+import { reqAuth, resAuth } from "../../types/apiTypes";
 
 //AUTHENTICATION
-export const authenticationRequest = createAction<ObjectUser>(
+export const authenticationRequest = createAction<resAuth>(
   authenticationActions.AUTHENTICATION_REQUEST
 );
 export const authenticationSuccess = createAction(

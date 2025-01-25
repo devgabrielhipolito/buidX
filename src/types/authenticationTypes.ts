@@ -1,6 +1,7 @@
 export type ObjectUser = {
   email: string;
   password: string;
+  status?: string;
 };
 
 type User = {
