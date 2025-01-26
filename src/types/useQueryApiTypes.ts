@@ -10,8 +10,8 @@ export enum ActionsApi {
   requestUser = "requestUser",
 }
 
-export type dispatchTypes = {
-  data?: any;
+export type dispatchTypes<T> = {
+  data: T;
   action: any;
 };
 

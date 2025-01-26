@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { dispatchTypes, MappedFetchTypes } from "../../types/useQueryApiTypes";
+import {
+  dispatchTypes,
+  MappedFetchTypes,
+  returnType,
+} from "../../types/useQueryApiTypes";
 import { useDispatch } from "react-redux";
 import {
   useAuthenticationUserMutation,
@@ -23,8 +27,15 @@ import {
   productionUpdate,
 } from "../redux/actions";
 import { CREATE_EMPLOYEE_DELETE } from "../redux/reducers/createEmployeeReducer";
-import { reqAuth } from "../types/apiTypes";
+import { reqAuth, resAuth } from "../types/apiTypes";
 import { ObjectUser } from "../../types/authenticationTypes";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import {
+  fetchBaseQuery,
+  FetchBaseQueryError,
+  MutationActionCreatorResult,
+  MutationDefinition,
+} from "@reduxjs/toolkit/query";
 
 export const useQueryApi = () => {
   const [message, setMessage] = useState(null);
@@ -56,7 +67,7 @@ export const useQueryApi = () => {
   const handleApi = <T>(
     apiCall: Promise<ApiResponse<T>>,
     onSucess: (data: T) => void,
-    onError: (error: ApiResponse<T>["error"]) => void
+    onError: (error: string) => void
   ) => {
     apiCall.then(({ data, error }) => {
       if (data) {
@@ -74,7 +85,7 @@ export const useQueryApi = () => {
       authenticationUser(data),
       (responseData) => {
         if (responseData.status === "autenticado") {
-          dispatch(authenticationRequest(data));
+          dispatch(authenticationRequest(responseData));
           dispatch(authenticationSuccess());
         }
       },
@@ -131,7 +142,7 @@ export const useQueryApi = () => {
     // },
   };
 
-  const dispatchAction = ({ action, data }: dispatchTypes) => {
+  const dispatchAction = <T>({ action, data }: dispatchTypes<T>) => {
     mappedFetch[action](data);
     console.log(action);
   };

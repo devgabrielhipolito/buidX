@@ -12,7 +12,7 @@ const queryApi = createApi({
   }),
   endpoints: (builder) => {
     return {
-      authenticationUser: builder.mutation<resAuth, reqAuth>({
+      authenticationUser: builder.mutation({
         query: (data) => ({
           url: "/auth",
           body: data,
