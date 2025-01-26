@@ -29,7 +29,7 @@ import {
 import { CREATE_EMPLOYEE_DELETE } from "../redux/reducers/createEmployeeReducer";
 import { reqAuth, resAuth } from "../types/apiTypes";
 import { ObjectUser } from "../../types/authenticationTypes";
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { ActionCreatorWithPayload, SerializedError } from "@reduxjs/toolkit";
 import {
   fetchBaseQuery,
   FetchBaseQueryError,
@@ -37,12 +37,27 @@ import {
   MutationDefinition,
 } from "@reduxjs/toolkit/query";
 
-export const useQueryApi = () => {
-  const [message, setMessage] = useState(null);
+interface ApiResponse<T> {
+  data?: T;
+  message?: FetchBaseQueryError | SerializedError | MessageTyp<T>;
+}
+
+interface MessageTyp<T> extends Pick<ApiResponse<T>, "message"> {
+  status: number;
+  data: {
+    error: String;
+  };
+}
+
+export const useQueryApi = <T>() => {
+  const [message, setMessage] = useState<
+    FetchBaseQueryError | SerializedError | MessageTyp<T>
+  >();
   const dispatch = useDispatch();
 
   const [authenticationUser, { isLoading: isAuthLoading }] =
     useAuthenticationUserMutation();
+
   const [productionCreate, { isLoading: isCreatedProduction }] =
     useProductionCreateMutation();
 
@@ -59,24 +74,19 @@ export const useQueryApi = () => {
     useDeleteUserApiMutation();
   const [requestUser] = useRequestUserMutation();
 
-  interface ApiResponse<T> {
-    data?: T;
-    error?: string;
-  }
-
   const handleApi = <T>(
     apiCall: Promise<ApiResponse<T>>,
     onSucess: (data: T) => void,
-    onError: (error: string) => void
+    onError: (
+      error: FetchBaseQueryError | SerializedError | MessageTyp<T>
+    ) => void
   ) => {
-    apiCall.then(({ data, error }) => {
+    apiCall.then(({ data, message }) => {
       if (data) {
         onSucess(data);
-      } else if (error) {
-        onError(error);
       }
 
-      console.log("Error desconhecido");
+      if (message) onError(message);
     });
   };
 
@@ -89,18 +99,10 @@ export const useQueryApi = () => {
           dispatch(authenticationSuccess());
         }
       },
-      (error) => {
-        console.log("Authentication error", error);
+      (message) => {
+        if (message) setMessage(message);
       }
     );
-
-    // apiTarget.then(({ data, error }) => {
-    //   if (data && data.status === "autenticado") {
-    //     dispatch(authenticationRequest(data));
-    //     dispatch(authenticationSuccess());
-    //   }
-    //   console.log(error);
-    // });
   };
 
   const createUser = (data: any) => {
@@ -111,7 +113,7 @@ export const useQueryApi = () => {
         createEmployeeSucess();
       }
 
-      console.log(data);
+      console.log(error);
     });
   };
 
@@ -166,5 +168,5 @@ export const useQueryApi = () => {
   //   });
   // };
 
-  return { dispatchAction, isLoading: isAuthLoading };
+  return { dispatchAction, isLoading: isAuthLoading, message };
 };

@@ -17,10 +17,8 @@ const Login = () => {
   } = useForm<AuthSchema>({
     resolver: yupResolver(authSchema),
   });
-  const { dispatchAction, isLoading } = useQueryApi();
-  const message = useSelector(
-    (state: rootState) => state.authentication.message
-  );
+  const { dispatchAction, isLoading, message } = useQueryApi();
+  console.log(message?.data);
   const onSubmit = handleSubmit((data) => {
     dispatchAction({ data, action: ActionsApi.authentication });
   });
@@ -43,8 +41,6 @@ const Login = () => {
       <a className="mt-5" href="">
         Esqueceu a senha?
       </a>
-      
-      <p className="mt-2 bg-red-600 text-slate-200 p-2 rounded-lg ">{message}</p>
     </section>
   );
 };
